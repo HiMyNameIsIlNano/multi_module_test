@@ -1,0 +1,15 @@
+com/daniele/mydatabase/dao/BaseEntityDao.class
+com/daniele/mydatabase/model/userAccount/UserProfileDetails$1.class
+com/daniele/mydatabase/model/userAccount/UserProfileDetails_.class
+com/daniele/mydatabase/model/userAccount/UserProfileDetails.class
+com/daniele/mydatabase/model/userAccount/BaseEntity_.class
+com/daniele/mydatabase/dao/impl/DummyDaoImpl.class
+com/daniele/mydatabase/model/userAccount/UserRole.class
+com/daniele/mydatabase/model/userAccount/BaseEntity.class
+com/daniele/mydatabase/dao/impl/BaseEntityDaoImpl.class
+com/daniele/mydatabase/dao/UserProfileDao.class
+com/daniele/mydatabase/model/userAccount/SlicedEntity_.class
+com/daniele/mydatabase/dao/impl/UserProfileDaoImpl.class
+com/daniele/mydatabase/model/userAccount/SlicedEntity.class
+com/daniele/mydatabase/dao/DummyDao.class
+com/daniele/mydatabase/model/userAccount/UserProfileDetails$UserProfileBuilder.class

@@ -1,0 +1,4 @@
+com/daniele/mylogger/LogExecutionTime.class
+com/daniele/mylogger/LoggerAspect.class
+com/daniele/mylogger/LogMethodExecution.class
+com/daniele/mylogger/LoggerFactory.class

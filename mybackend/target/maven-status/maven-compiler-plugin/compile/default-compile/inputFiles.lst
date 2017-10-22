@@ -1,0 +1,17 @@
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/controller/AuthRestController.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/BaseEntityService.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/controller/LoopbackRestController.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/DbPopluatorServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/LoginServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/dto/UserProfileDto.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/DummyServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/LoginService.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/controller/UserAccountRestController.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/shared/TokenUtils.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/UserProfileService.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/SecurityServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/DummyService.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/SecurityService.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/BaseEntityServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/service/impl/UserProfileServiceImpl.java
+/home/user/Development/Test/multi_module_test/mybackend/src/main/java/com/daniele/mybackend/dto/AuthDto.java

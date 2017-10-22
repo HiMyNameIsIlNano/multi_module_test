@@ -1,0 +1,289 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building myapp 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> tomcat7-maven-plugin:2.2:run (default-cli) > process-classes @ web >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ web ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ web ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- aspectj-maven-plugin:1.10:compile (compile_with_aspectj) @ web ---
+[INFO] No modifications found skipping aspectJ compile
+[INFO] 
+[INFO] <<< tomcat7-maven-plugin:2.2:run (default-cli) < process-classes @ web <<<
+[INFO] 
+[INFO] --- tomcat7-maven-plugin:2.2:run (default-cli) @ web ---
+[INFO] Running war on http://localhost:9090/
+[INFO] Using existing Tomcat server configuration at /home/user/Development/Test/multi_module_test/myapp/target/tomcat
+[INFO] create webapp with contextPath: 
+ott 19, 2017 9:45:03 PM org.apache.coyote.AbstractProtocol init
+INFORMAZIONI: Initializing ProtocolHandler ["http-bio-9090"]
+ott 19, 2017 9:45:03 PM org.apache.catalina.core.StandardService startInternal
+INFORMAZIONI: Starting service Tomcat
+ott 19, 2017 9:45:03 PM org.apache.catalina.core.StandardEngine startInternal
+INFORMAZIONI: Starting Servlet Engine: Apache Tomcat/7.0.47
+ott 19, 2017 9:45:06 PM org.apache.catalina.core.ApplicationContext log
+INFORMAZIONI: 1 Spring WebApplicationInitializers detected on classpath
+ott 19, 2017 9:45:06 PM org.apache.catalina.core.ApplicationContext log
+INFORMAZIONI: Initializing Spring root WebApplicationContext
+ott 19, 2017 9:45:06 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+INFORMAZIONI: Root WebApplicationContext: initialization started
+ott 19, 2017 9:45:06 PM org.springframework.web.context.support.AnnotationConfigWebApplicationContext prepareRefresh
+INFORMAZIONI: Refreshing Root WebApplicationContext: startup date [Thu Oct 19 21:45:06 CEST 2017]; root of context hierarchy
+ott 19, 2017 9:45:06 PM org.springframework.web.context.support.AnnotationConfigWebApplicationContext loadBeanDefinitions
+INFORMAZIONI: Found 3 annotated classes in package [com.daniele.myapp.config]
+ott 19, 2017 9:45:07 PM org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor <init>
+INFORMAZIONI: JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ott 19, 2017 9:45:07 PM org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker postProcessAfterInitialization
+INFORMAZIONI: Bean 'h2DataSource' of type [com.daniele.mydatabase.config.H2DataSource$$EnhancerBySpringCGLIB$$3185ee10] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[INFO] MLog clients using slf4j logging.
+[INFO] Initializing c3p0-0.9.5.2 [built 08-December-2015 22:06:04 -0800; debug? true; trace: 10]
+ott 19, 2017 9:45:08 PM org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean createNativeEntityManagerFactory
+INFORMAZIONI: Building JPA container EntityManagerFactory for persistence unit 'default'
+ott 19, 2017 9:45:08 PM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+ott 19, 2017 9:45:08 PM org.hibernate.Version logVersion
+INFO: HHH000412: Hibernate Core {5.2.10.Final}
+ott 19, 2017 9:45:08 PM org.hibernate.cfg.Environment <clinit>
+INFO: HHH000206: hibernate.properties not found
+ott 19, 2017 9:45:08 PM org.hibernate.annotations.common.reflection.java.JavaReflectionManager <clinit>
+INFO: HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+[INFO] Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kfsx9rf12gem1qekoi8|38c43052, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> org.h2.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kfsx9rf12gem1qekoi8|38c43052, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:h2:mem:testdb, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 20, maxStatements -> 100, maxStatementsPerConnection -> 0, minPoolSize -> 5, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+[WARNING] Bad pool size config, start 3 < min 5. Using 5 as start.
+ott 19, 2017 9:45:08 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table USER_PROFILE if exists
+Hibernate: create table USER_PROFILE (id bigint generated by default as identity, is_deleted boolean, last_update date, updated_by varchar(255), valid_from date, valid_to date, EMAIL varchar(255), NAME varchar(255), NICKNAME varchar(255), PASSWORD varchar(255), SURNAME varchar(255), ROLE integer, primary key (id))
+ott 19, 2017 9:45:09 PM org.hibernate.tool.schema.internal.SchemaCreatorImpl applyImportSources
+INFO: HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@51a96778'
+ott 19, 2017 9:45:09 PM org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean buildNativeEntityManagerFactory
+INFORMAZIONI: Initialized JPA EntityManagerFactory for persistence unit 'default'
+UserProfile [name=User_0, surname=Surname_0, email=user_0@email.com, nickname=Nickname_0, password=$2a$10$UNyIYRTUuNsHWp/rVKqq3eFXpO9HCYU.8hIvwjE.W3Ptc9TgALofS, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_1, surname=Surname_1, email=user_1@email.com, nickname=Nickname_1, password=$2a$10$qwc4zT/ZIYoR/K255Xen3ec4TlaJJkf3V/bs.p1s32U1ao1rXEraa, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_2, surname=Surname_2, email=user_2@email.com, nickname=Nickname_2, password=$2a$10$0GOP6/dRr72mwUGtMid6iOYwxPTcOHSR56ba.e04p/wr1s6Kv1B4C, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_3, surname=Surname_3, email=user_3@email.com, nickname=Nickname_3, password=$2a$10$fAPic1KmnaEtxRKaMkcwu.49sy7LkAqr0T/z3CHQZRX1WgTZFliVK, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_4, surname=Surname_4, email=user_4@email.com, nickname=Nickname_4, password=$2a$10$u0PS0JtXdscsIjTjSBOs6ut6/uZEoEIgN3CiAvXDFS8xl5du6jBLu, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping register
+INFORMAZIONI: Mapped "{[/loopback/{text}],methods=[GET]}" onto public void com.daniele.mybackend.controller.LoopbackRestController.getLoopback(java.lang.String)
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping register
+INFORMAZIONI: Mapped "{[/user-rest/list],methods=[GET]}" onto public java.util.List<com.daniele.mybackend.dto.UserProfileDto> com.daniele.mybackend.controller.UserAccountRestController.getUsers()
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping register
+INFORMAZIONI: Mapped "{[/user-rest/save],methods=[POST]}" onto public com.daniele.mybackend.dto.UserProfileDto com.daniele.mybackend.controller.UserAccountRestController.saveUser(com.daniele.mydatabase.model.userAccount.UserProfileDetails)
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping register
+INFORMAZIONI: Mapped "{[/user-rest/{id}],methods=[GET]}" onto public com.daniele.mybackend.dto.UserProfileDto com.daniele.mybackend.controller.UserAccountRestController.getUser(java.lang.Long)
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.handler.SimpleUrlHandlerMapping registerHandler
+INFORMAZIONI: Mapped URL path [/resources/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.handler.SimpleUrlHandlerMapping registerHandler
+INFORMAZIONI: Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter initControllerAdviceCache
+INFORMAZIONI: Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Thu Oct 19 21:45:06 CEST 2017]; root of context hierarchy
+ott 19, 2017 9:45:11 PM org.springframework.web.context.ContextLoader initWebApplicationContext
+INFORMAZIONI: Root WebApplicationContext: initialization completed in 4841 ms
+ott 19, 2017 9:45:11 PM org.apache.catalina.core.ApplicationContext log
+INFORMAZIONI: Initializing Spring FrameworkServlet 'dispatcher'
+ott 19, 2017 9:45:11 PM org.springframework.web.servlet.DispatcherServlet initServletBean
+INFORMAZIONI: FrameworkServlet 'dispatcher': initialization started
+ott 19, 2017 9:45:11 PM org.springframework.web.context.support.AnnotationConfigWebApplicationContext prepareRefresh
+INFORMAZIONI: Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Thu Oct 19 21:45:11 CEST 2017]; parent: Root WebApplicationContext
+ott 19, 2017 9:45:11 PM org.springframework.web.context.support.AnnotationConfigWebApplicationContext loadBeanDefinitions
+INFORMAZIONI: Registering annotated classes: [class com.daniele.myapp.config.WebMvcInitializer]
+ott 19, 2017 9:45:11 PM org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor <init>
+INFORMAZIONI: JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ott 19, 2017 9:45:11 PM org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker postProcessAfterInitialization
+INFORMAZIONI: Bean 'h2DataSource' of type [com.daniele.mydatabase.config.H2DataSource$$EnhancerBySpringCGLIB$$3185ee10] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+ott 19, 2017 9:45:11 PM org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean createNativeEntityManagerFactory
+INFORMAZIONI: Building JPA container EntityManagerFactory for persistence unit 'default'
+ott 19, 2017 9:45:11 PM org.hibernate.jpa.internal.util.LogHelper logPersistenceUnitInformation
+INFO: HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+[INFO] Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, contextClassLoaderSource -> caller, dataSourceName -> z8kfsx9rf12gem1qekoi8|29494ddd, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> org.h2.Driver, extensions -> {}, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, forceSynchronousCheckins -> false, forceUseNamedDriverClass -> false, identityToken -> z8kfsx9rf12gem1qekoi8|29494ddd, idleConnectionTestPeriod -> 0, initialPoolSize -> 3, jdbcUrl -> jdbc:h2:mem:testdb, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 20, maxStatements -> 100, maxStatementsPerConnection -> 0, minPoolSize -> 5, numHelperThreads -> 3, preferredTestQuery -> null, privilegeSpawnedThreads -> false, properties -> {user=******, password=******}, propertyCycle -> 0, statementCacheNumDeferredCloseThreads -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, userOverrides -> {}, usesTraditionalReflectiveProxies -> false ]
+[WARNING] Bad pool size config, start 3 < min 5. Using 5 as start.
+ott 19, 2017 9:45:11 PM org.hibernate.dialect.Dialect <init>
+INFO: HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: drop table USER_PROFILE if exists
+Hibernate: create table USER_PROFILE (id bigint generated by default as identity, is_deleted boolean, last_update date, updated_by varchar(255), valid_from date, valid_to date, EMAIL varchar(255), NAME varchar(255), NICKNAME varchar(255), PASSWORD varchar(255), SURNAME varchar(255), ROLE integer, primary key (id))
+ott 19, 2017 9:45:11 PM org.hibernate.tool.schema.internal.SchemaCreatorImpl applyImportSources
+INFO: HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@51a96778'
+ott 19, 2017 9:45:11 PM org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean buildNativeEntityManagerFactory
+INFORMAZIONI: Initialized JPA EntityManagerFactory for persistence unit 'default'
+UserProfile [name=User_0, surname=Surname_0, email=user_0@email.com, nickname=Nickname_0, password=$2a$10$RUzP/UvvzXgIFYrXqX1lP.aWvcGxNZkpSxV7oIXWBI296MQMMQabq, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_1, surname=Surname_1, email=user_1@email.com, nickname=Nickname_1, password=$2a$10$Q4sKBkM/FJ3/WC4vV/QO9.9FRjCBmJC4DZ2ie8q6UIwfBFNluHZHO, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_2, surname=Surname_2, email=user_2@email.com, nickname=Nickname_2, password=$2a$10$770ItLRhZWs6FsAiXsGBkeCkQdUcelYn1DxXVhevexHG6nQJcIN5a, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_3, surname=Surname_3, email=user_3@email.com, nickname=Nickname_3, password=$2a$10$tyLA3HD/YFCwPLIZi2R2r.Tr3Yd23nX8uvsJV7gSTWQ3Jko.0MhnS, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+UserProfile [name=User_4, surname=Surname_4, email=user_4@email.com, nickname=Nickname_4, password=$2a$10$8jYPY6wKW.ZqYTMTbgO25u5Ho/p4bBF.rUW2sRyVFcxdeFXpJdr26, role=USER]
+Hibernate: insert into USER_PROFILE (id, is_deleted, last_update, updated_by, valid_from, valid_to, EMAIL, NAME, NICKNAME, PASSWORD, SURNAME, ROLE) values (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+ott 19, 2017 9:45:12 PM org.springframework.web.context.support.AnnotationConfigWebApplicationContext refresh
+AVVERTENZA: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startDBManager' defined in class path resource [com/daniele/mydatabase/config/H2DataSource.class]: Invocation of init method failed; nested exception is org.h2.jdbc.JdbcSQLException: Exception opening port "8082" (port may be in use), cause: "java.net.BindException: Indirizzo già in uso" [90061-196]
+ott 19, 2017 9:45:12 PM org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean destroy
+INFORMAZIONI: Closing JPA EntityManagerFactory for persistence unit 'default'
+ott 19, 2017 9:45:12 PM org.springframework.web.servlet.DispatcherServlet initServletBean
+GRAVE: Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startDBManager' defined in class path resource [com/daniele/mydatabase/config/H2DataSource.class]: Invocation of init method failed; nested exception is org.h2.jdbc.JdbcSQLException: Exception opening port "8082" (port may be in use), cause: "java.net.BindException: Indirizzo già in uso" [90061-196]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:540)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:171)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1091)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.jdbc.JdbcSQLException: Exception opening port "8082" (port may be in use), cause: "java.net.BindException: Indirizzo già in uso" [90061-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:180)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:146)
+	at org.h2.server.web.WebServer.start(WebServer.java:342)
+	at org.h2.tools.Server.start(Server.java:484)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
+	... 25 more
+Caused by: java.net.BindException: Indirizzo già in uso
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:176)
+	... 35 more
+
+ott 19, 2017 9:45:12 PM org.apache.catalina.core.ApplicationContext log
+GRAVE: StandardWrapper.Throwable
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'startDBManager' defined in class path resource [com/daniele/mydatabase/config/H2DataSource.class]: Invocation of init method failed; nested exception is org.h2.jdbc.JdbcSQLException: Exception opening port "8082" (port may be in use), cause: "java.net.BindException: Indirizzo già in uso" [90061-196]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:540)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:171)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1091)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.jdbc.JdbcSQLException: Exception opening port "8082" (port may be in use), cause: "java.net.BindException: Indirizzo già in uso" [90061-196]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:180)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:146)
+	at org.h2.server.web.WebServer.start(WebServer.java:342)
+	at org.h2.tools.Server.start(Server.java:484)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
+	... 25 more
+Caused by: java.net.BindException: Indirizzo già in uso
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:176)
+	... 35 more
+
+ott 19, 2017 9:45:12 PM org.apache.catalina.core.StandardContext loadOnStartup
+GRAVE: Servlet  threw load() exception
+java.net.BindException: Indirizzo già in uso
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.AbstractPlainSocketImpl.bind(AbstractPlainSocketImpl.java:387)
+	at java.net.ServerSocket.bind(ServerSocket.java:375)
+	at java.net.ServerSocket.<init>(ServerSocket.java:237)
+	at java.net.ServerSocket.<init>(ServerSocket.java:128)
+	at org.h2.util.NetUtils.createServerSocketTry(NetUtils.java:176)
+	at org.h2.util.NetUtils.createServerSocket(NetUtils.java:146)
+	at org.h2.server.web.WebServer.start(WebServer.java:342)
+	at org.h2.tools.Server.start(Server.java:484)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:540)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:171)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
+	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1280)
+	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1091)
+	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5176)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5460)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+ott 19, 2017 9:45:12 PM org.apache.coyote.AbstractProtocol start
+INFORMAZIONI: Starting ProtocolHandler ["http-bio-9090"]

@@ -1,0 +1,17 @@
+com/daniele/mybackend/service/BaseEntityService.class
+com/daniele/mybackend/service/impl/DbPopluatorServiceImpl.class
+com/daniele/mybackend/service/DummyService.class
+com/daniele/mybackend/service/impl/BaseEntityServiceImpl.class
+com/daniele/mybackend/controller/UserAccountRestController.class
+com/daniele/mybackend/shared/TokenUtils.class
+com/daniele/mybackend/service/SecurityService.class
+com/daniele/mybackend/dto/UserProfileDto.class
+com/daniele/mybackend/service/LoginService.class
+com/daniele/mybackend/service/impl/SecurityServiceImpl.class
+com/daniele/mybackend/controller/LoopbackRestController.class
+com/daniele/mybackend/service/impl/DummyServiceImpl.class
+com/daniele/mybackend/service/impl/UserProfileServiceImpl.class
+com/daniele/mybackend/controller/AuthRestController.class
+com/daniele/mybackend/service/UserProfileService.class
+com/daniele/mybackend/dto/AuthDto.class
+com/daniele/mybackend/service/impl/LoginServiceImpl.class
