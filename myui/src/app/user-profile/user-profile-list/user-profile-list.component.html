@@ -1,0 +1,18 @@
+<h2>User(s) Table</h2>
+<p>User(s) List:</p>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let userProfile of userProfiles">
+			<td>{{ userProfile.name }}</td>
+			<td>{{ userProfile.surname }}</td>
+			<td>{{ userProfile.nickname }}</td>
+		</tr>
+	</tbody>
+</table>
