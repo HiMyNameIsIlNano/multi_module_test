@@ -1,8 +1,0 @@
-com/daniele/myapp/db/config/H2DataSourceInitializer.class
-com/daniele/myapp/web/config/WebMvcInitializer.class
-com/daniele/myapp/web/security/EntryPointUnauthorizedHandler.class
-com/daniele/myapp/db/config/DbPropertiesConfig.class
-com/daniele/myapp/web/config/SpringWebSecurityConfig.class
-com/daniele/myapp/web/config/WebAppIntializer.class
-com/daniele/myapp/web/security/AuthenticationTokenFilter.class
-com/daniele/myapp/web/config/HibernateInitializer.class

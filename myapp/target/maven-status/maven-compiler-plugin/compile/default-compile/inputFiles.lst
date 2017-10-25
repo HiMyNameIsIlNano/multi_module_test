@@ -1,9 +1,0 @@
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/config/WebAppIntializer.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/db/config/DbPropertiesConfig.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/db/config/H2DataSourceInitializer.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/security/AuthenticationTokenFilter.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/config/HibernateInitializer.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/security/EntryPointUnauthorizedHandler.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/config/AppPropertiesConfig.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/config/SpringWebSecurityConfig.java
-/home/user/Development/Test/multi_module_test/myapp/src/main/java/com/daniele/myapp/web/config/WebMvcInitializer.java
