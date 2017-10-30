@@ -42,7 +42,7 @@ export class AuthService {
     getToken(): Observable<boolean> {
         const local = localStorage.getItem( 'currentUser' );
         const auth = Auth.fromLocalStorage( local );
-        
+
         return this.http.post( `${this.restUrl}/validate-token`, auth )
             .map(
             ( response: Response ) => {
@@ -50,6 +50,7 @@ export class AuthService {
             } )
             .catch(
             ( error: Response ) => {
+                console.log(error);
                 return Observable.throw( 'Error: getToken: an error occurred while validating the token' );
             } );
     }
@@ -57,7 +58,7 @@ export class AuthService {
     isAuthenticated() {
         // TODO: this is wrong! I have to check the result of the Observable...
         if (localStorage.getItem( 'currentUser' ) != null) {
-            return this.getToken() != null;   
+            return this.getToken() != null;
         } else {
             return false;
         }

@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         console.log( 'checkBackendStatus()' );
         this.loopbackService
-            .testRestInterfaceWithPolling( 'hello!' )
+            .testRestInterfaceWithPolling( 'test backend response' )
             .subscribe(( response: Response ) => {
                 this.response = response.statusText === 'OK';
             } );
