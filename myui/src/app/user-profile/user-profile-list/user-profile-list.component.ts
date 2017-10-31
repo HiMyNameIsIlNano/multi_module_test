@@ -26,7 +26,7 @@ export class UserProfileListComponent implements OnInit {
     }
 
     validateToken() {
-        this.authService.getToken()
+        this.authService.isValidToken()
         .subscribe(
             ( result: any ) => {
                 console.log( result );

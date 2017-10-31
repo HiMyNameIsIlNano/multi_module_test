@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
                                       username: loginResult.getEmail(),
                                       token: loginResult.getToken()
                                   }));
-                      const token = this.authService.getToken();
+                      const token = this.authService.isValidToken();
                       console.log(token);
                       this.router.navigate(['/list']);
                   }

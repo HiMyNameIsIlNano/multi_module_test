@@ -41,17 +41,19 @@ public class AuthRestController {
 	@PostMapping(path = "/auth")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Map<String, String>> authUser(@RequestBody AuthDto authDto) throws AuthenticationException {
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-				authDto.getEmail(), 
-				authDto.getPassword());
-		
-		Authentication authentication = authenticationManager.authenticate(authenticationToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
-		String token = tokenUtils.generateToken(userProfile);
-		Map<String, String> authResponse = Collections.singletonMap("token", token);
-		
+        String token = null;
+        if (authDto.getEmail() != null && authDto.getPassword() != null) {
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                    authDto.getEmail(),
+                    authDto.getPassword());
+
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+            token = tokenUtils.generateToken(userProfile);
+        }
+        Map<String, String> authResponse = Collections.singletonMap("token", token);
 		return ResponseEntity.ok(authResponse);
 	}
 	
@@ -59,8 +61,8 @@ public class AuthRestController {
 	@PostMapping(path = "/validate-token")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Map<String, Boolean>> validateToken(@RequestBody AuthDto authDto) throws AuthenticationException {
-		UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
-		Boolean isValid = tokenUtils.validateToken(authDto.getToken(), userProfile);
+        UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+        Boolean isValid = tokenUtils.validateToken(authDto.getToken(), userProfile);
 		Map<String, Boolean> response = Collections.singletonMap("valid", isValid);
 		return ResponseEntity.ok(response);
 	}

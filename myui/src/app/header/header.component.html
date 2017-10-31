@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">
-        Multi Module Application 
+        Multi Module Application
       </a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-	      <ng-template [ngIf]="authService.isAuthenticated()">
+	      <ng-template [ngIf]="isLoggedUser">
 	        <li routerLinkActive="active"><a [routerLink]="['/blog']">My Blog</a></li>
 	        <li routerLinkActive="active"><a [routerLink]="['/events']" >My Events</a></li>
 	        <li routerLinkActive="active"><a [routerLink]="['/list']" >My Friends</a></li>
@@ -17,11 +17,11 @@
         <li class="dropdown" appDropdown>
           <a style="cursor: pointer" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          	<ng-template [ngIf]="!authService.isAuthenticated()">
+          	<ng-template [ngIf]="!isLoggedUser">
             	<li routerLinkActive="active"><a style="cursor: pointer" [routerLink]="['/login']">Log in</a></li>
                 <li routerLinkActive="active"><a style="cursor: pointer" [routerLink]="['/register']">Register</a></li>
             </ng-template>
-            <ng-template [ngIf]="authService.isAuthenticated()">
+            <ng-template [ngIf]="isLoggedUser">
             	<li routerLinkActive="active"><a style="cursor: pointer" (click)="onLogout()">Log out</a></li>
             </ng-template>
           </ul>

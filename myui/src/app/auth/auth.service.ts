@@ -39,7 +39,7 @@ export class AuthService {
         localStorage.removeItem( 'currentUser' );
     }
 
-    getToken(): Observable<boolean> {
+    isValidToken(): Observable<boolean> {
         const local = localStorage.getItem( 'currentUser' );
         const auth = Auth.fromLocalStorage( local );
 
@@ -51,16 +51,7 @@ export class AuthService {
             .catch(
             ( error: Response ) => {
                 console.log(error);
-                return Observable.throw( 'Error: getToken: an error occurred while validating the token' );
+                return Observable.throw( 'Error: isValidToken: an error occurred while validating the token' );
             } );
-    }
-
-    isAuthenticated() {
-        // TODO: this is wrong! I have to check the result of the Observable...
-        if (localStorage.getItem( 'currentUser' ) != null) {
-            return this.getToken() != null;
-        } else {
-            return false;
-        }
     }
 }

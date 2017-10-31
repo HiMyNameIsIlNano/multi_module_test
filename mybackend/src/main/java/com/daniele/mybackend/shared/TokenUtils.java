@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +29,7 @@ public class TokenUtils {
 		return env.getProperty("application.token.header");
 	}
 
-	public String getUsernameFromToken(String token) {
+	public String getUsernameFromToken(@NotNull String token) {
 		String username;
 		try {
 			final Claims claims = this.getClaimsFromToken(token);
@@ -39,7 +40,7 @@ public class TokenUtils {
 		return username;
 	}
 
-	public Date getCreatedDateFromToken(String token) {
+	public Date getCreatedDateFromToken(@NotNull String token) {
 		Date created;
 		try {
 			final Claims claims = this.getClaimsFromToken(token);
@@ -50,7 +51,7 @@ public class TokenUtils {
 		return created;
 	}
 
-	public Date getExpirationDateFromToken(String token) {
+	public Date getExpirationDateFromToken(@NotNull String token) {
 		Date expiration;
 		try {
 			final Claims claims = this.getClaimsFromToken(token);
@@ -102,13 +103,13 @@ public class TokenUtils {
 		}
 	}
 
-	public Boolean validateToken(String token, UserDetails userDetails) {
+	public Boolean validateToken(@NotNull String token, @NotNull UserDetails userDetails) {
 		UserProfileDetails user = (UserProfileDetails) userDetails;
 		final String username = getUsernameFromToken(token);
-		return (username.equals(user.getUsername()) && !(isTokenExpired(token)));
+		return (username != null && username.equals(user.getUsername()) && !(isTokenExpired(token)));
 	}
 
-	private Boolean isTokenExpired(String token) {
+	private Boolean isTokenExpired(@NotNull String token) {
 		final Date expiration = getExpirationDateFromToken(token);
 		return expiration.before(generateCurrentDate());
 	}
