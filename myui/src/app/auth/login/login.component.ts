@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { Auth } from '../auth.model';
-import { UserProfile } from '../../user-profile/user-profile.model';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {AuthService} from '../auth.service';
+import {Auth} from '../auth.model';
+import {Router} from '@angular/router';
+import {HeaderComponent} from "../../header/header.component";
 
 @Component({
   selector: 'app-login',
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
                                       token: loginResult.getToken()
                                   }));
                       const token = this.authService.isValidToken();
+                      HeaderComponent.updateMenuItems.next(true);
                       console.log(token);
                       this.router.navigate(['/list']);
                   }
