@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
                       const token = this.authService.isValidToken();
                       HeaderComponent.updateMenuItems.next(true);
                       console.log(token);
-                      this.router.navigate(['/list']);
+                      this.router.navigate(['/account/friends']);
                   }
               },
               (error) => console.log(error)
