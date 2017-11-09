@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

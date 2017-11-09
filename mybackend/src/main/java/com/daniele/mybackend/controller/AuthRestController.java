@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.daniele.mybackend.dto.AuthDto;
 import com.daniele.mybackend.service.UserProfileService;
 import com.daniele.mybackend.shared.TokenUtils;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mylogger.LogMethodExecution;
 
 @RestController

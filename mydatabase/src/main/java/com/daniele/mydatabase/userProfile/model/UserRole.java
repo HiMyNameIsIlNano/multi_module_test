@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.model.userAccount;
+package com.daniele.mydatabase.userProfile.model;
 
 public enum UserRole {
 	
@@ -10,6 +10,7 @@ public enum UserRole {
     public String getAuthority(){
         return this.authority;
     }
+    
     private UserRole(String authority){
         this.authority = authority;
     }

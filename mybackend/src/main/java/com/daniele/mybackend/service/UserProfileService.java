@@ -2,7 +2,7 @@ package com.daniele.mybackend.service;
 
 import java.util.List;
 
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 public interface UserProfileService extends BaseEntityService<UserProfileDetails> {
 	public List<UserProfileDetails> getAllUsers();

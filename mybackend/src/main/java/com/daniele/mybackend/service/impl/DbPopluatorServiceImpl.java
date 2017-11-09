@@ -6,9 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.daniele.mybackend.service.UserProfileService;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails.UserProfileBuilder;
-import com.daniele.mydatabase.model.userAccount.UserRole;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserRole;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails.UserProfileBuilder;
 
 @Service
 public class DbPopluatorServiceImpl {

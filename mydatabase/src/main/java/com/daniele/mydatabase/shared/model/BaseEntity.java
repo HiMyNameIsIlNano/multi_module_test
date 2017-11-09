@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.model.userAccount;
+package com.daniele.mydatabase.shared.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

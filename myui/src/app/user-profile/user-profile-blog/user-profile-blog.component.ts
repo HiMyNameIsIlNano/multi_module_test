@@ -1,19 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileService } from "../user-profile.service";
 
-@Component({
-  selector: 'app-user-profile-blog',
-  templateUrl: './user-profile-blog.component.html',
-  styleUrls: ['./user-profile-blog.component.css']
-})
+@Component( {
+    selector: 'app-user-profile-blog',
+    templateUrl: './user-profile-blog.component.html',
+    styleUrls: ['./user-profile-blog.component.css']
+} )
 export class UserProfileBlogComponent implements OnInit {
 
-  public number: number;
-  public numbers: number[] = [0,1,2,3,4];
+    public comments: string[] = [];
 
+    constructor( private userProfileService: UserProfileService ) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.userProfileService
+            .getUserCommentList()
+            .subscribe(
+            ( comments: string[] ) => {
+                this.comments = comments
+            },
+            ( error ) => console.log( error )
+            );
+    }
 
 }

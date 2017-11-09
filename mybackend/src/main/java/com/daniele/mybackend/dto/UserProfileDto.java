@@ -2,8 +2,8 @@ package com.daniele.mybackend.dto;
 
 import java.time.LocalDate;
 
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails.UserProfileBuilder;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails.UserProfileBuilder;
 
 public class UserProfileDto {
 

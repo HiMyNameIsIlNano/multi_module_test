@@ -9,8 +9,8 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.daniele.mydatabase.dao.UserProfileDao;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
 import com.daniele.mydatabase.model.userAccount.UserProfileDetails_;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mylogger.LogExecutionTime;
 
 @Repository

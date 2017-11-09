@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.model.userAccount;
+package com.daniele.mydatabase.userProfile.model;
 
 import java.util.Collection;
 
@@ -10,6 +10,8 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.daniele.mydatabase.shared.model.SlicedEntity;
 
 @Entity
 @Table(name = "USER_PROFILE")

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.daniele.mybackend.service.LoginService;
 import com.daniele.mybackend.service.UserProfileService;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @Service
 public class LoginServiceImpl implements LoginService {

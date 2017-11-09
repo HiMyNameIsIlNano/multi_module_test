@@ -17,7 +17,7 @@ export class UserProfileService {
     }
 
     getUserProfile(id: number): Observable<UserProfile> {
-        return this.http.get( `${this.restUrl}/{id}` )
+        return this.http.get( `${this.restUrl}/user/{id}` )
             .map(
             (response: Response) => {
                 const data = response.json();
@@ -30,7 +30,7 @@ export class UserProfileService {
     }
 
     getUserProfileList(): Observable<UserProfile[]> {
-        return this.http.get( `${this.restUrl}/list` )
+        return this.http.get( `${this.restUrl}/users` )
             .map(
             (response: Response) => {
                 const data = response.json();
@@ -41,8 +41,21 @@ export class UserProfileService {
                 return Observable.throw( 'Error: getUserProfileList: something went wrong with your request' );
             });
     }
+    
+    getUserCommentList(): Observable<string[]> {
+        return this.http.get( `${this.restUrl}/comments` )
+            .map(
+            (response: Response) => {
+                const data = response.json();
+                return data;
+            })
+            .catch(
+            ( error: Response ) => {
+                return Observable.throw( 'Error: getUserCommentList: something went wrong with your request' );
+            });
+    }
 
-    postUserProfile(userProfile: UserProfile) {
+    saveUserProfile(userProfile: UserProfile) {
         return this.http.post( `${this.restUrl}/save`, userProfile );
     }
 }

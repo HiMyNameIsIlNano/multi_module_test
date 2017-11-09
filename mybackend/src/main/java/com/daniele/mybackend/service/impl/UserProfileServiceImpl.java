@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.daniele.mybackend.service.UserProfileService;
 import com.daniele.mydatabase.dao.UserProfileDao;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @Service
 public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDetails> implements UserProfileService {

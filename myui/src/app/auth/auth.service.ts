@@ -18,7 +18,7 @@ export class AuthService {
     }
 
     onRegistration( userProfile: UserProfile ) {
-        return this.userProfileService.postUserProfile( userProfile );
+        return this.userProfileService.saveUserProfile( userProfile );
     }
 
     onLogin( authData: Auth ): Observable<Auth> {
