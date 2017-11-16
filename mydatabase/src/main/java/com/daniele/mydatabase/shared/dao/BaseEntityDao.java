@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.dao;
+package com.daniele.mydatabase.shared.dao;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './user-profile.model';
 import { ConfigurationService } from '../shared/configuration.service';
 import 'rxjs/Rx';
+import { UserProfileBlogModel } from "./user-profile-blog/user-profile-blog-item/user-profile-blog.model";
 
 @Injectable()
 export class UserProfileService {
@@ -42,8 +43,8 @@ export class UserProfileService {
             });
     }
     
-    getUserCommentList(): Observable<string[]> {
-        return this.http.get( `${this.restUrl}/comments` )
+    getUserCommentList(email: string): Observable<UserProfileBlogModel[]> {
+        return this.http.get( `${this.restUrl}/comments/{email}` )
             .map(
             (response: Response) => {
                 const data = response.json();

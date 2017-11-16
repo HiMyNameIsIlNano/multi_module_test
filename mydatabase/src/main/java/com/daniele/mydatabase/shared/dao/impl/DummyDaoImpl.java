@@ -1,8 +1,8 @@
-package com.daniele.mydatabase.dao.impl;
+package com.daniele.mydatabase.shared.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.daniele.mydatabase.dao.DummyDao;
+import com.daniele.mydatabase.shared.dao.DummyDao;
 
 @Repository
 public class DummyDaoImpl implements DummyDao {

@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.dao.impl;
+package com.daniele.mydatabase.userProfile.dao.impl;
 
 import java.util.List;
 
@@ -8,9 +8,12 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import com.daniele.mydatabase.dao.UserProfileDao;
-import com.daniele.mydatabase.model.userAccount.UserProfileDetails_;
+import com.daniele.mydatabase.shared.dao.impl.BaseEntityDaoImpl;
+import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
+import com.daniele.mydatabase.userProfile.model.Comment;
+import com.daniele.mydatabase.userProfile.model.Comment_;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails_;
 import com.daniele.mylogger.LogExecutionTime;
 
 @Repository
@@ -47,4 +50,14 @@ public class UserProfileDaoImpl extends BaseEntityDaoImpl<UserProfileDetails> im
 				.findFirst()
 				.orElse(null);
 	}
+	
+	@Override
+	public List<Comment> findCommentsByUser(UserProfileDetails userProfileDetails) {
+		CriteriaBuilder builder =  getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
+		Root<Comment> root = query.from(Comment.class);
+		query.where(builder.equal(root.get(Comment_.user), userProfileDetails));
+		return getEntityManager().createQuery(query).getResultList();
+	}
+	
 }

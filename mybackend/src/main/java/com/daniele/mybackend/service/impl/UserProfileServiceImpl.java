@@ -1,5 +1,6 @@
 package com.daniele.mybackend.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.daniele.mybackend.service.UserProfileService;
-import com.daniele.mydatabase.dao.UserProfileDao;
+import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
+import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @Service
@@ -45,5 +47,16 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Transactional 
 	public UserProfileDetails getUserByEmail(String email) {
 		return userProfileDao.findByEmail(email);
+	}
+	
+	@Override
+	@Transactional
+	public List<Comment> getCommentsByUser(String email) {
+		UserProfileDetails userProfileDetails = getUserByEmail(email);
+		if (userProfileDetails != null) {
+			return userProfileDao.findCommentsByUser(userProfileDetails);	
+		} else {
+			return Collections.emptyList();
+		}
 	}
 }

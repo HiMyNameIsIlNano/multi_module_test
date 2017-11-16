@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserProfileBlogModel } from "./user-profile-blog.model";
 
 @Component({
   selector: 'app-user-profile-blog-item',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class UserProfileBlogItemComponent implements OnInit {
 
-  @Input() text: string = '';
+  @Input() comment: UserProfileBlogModel;
     
   constructor() { }
 

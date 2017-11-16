@@ -29,12 +29,16 @@ public abstract class SlicedEntity extends BaseEntity {
 
 	@Column(name = "valid_to")
 	protected LocalDate validTo;
+	
+	@Column(name = "updated_by")
+	protected String updatedBy;
 
 	@PreUpdate
 	@PrePersist
 	public void setValidFromAndValidTo() {
 		this.validFrom = LocalDate.now();
 		this.validTo = DateUtils.END_OF_DATE_TIME;
+		this.updatedBy = "Dummy";
 	}
 
 	public LocalDate getValidFrom() {
@@ -45,4 +49,8 @@ public abstract class SlicedEntity extends BaseEntity {
 		return validTo;
 	}
 
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+	
 }

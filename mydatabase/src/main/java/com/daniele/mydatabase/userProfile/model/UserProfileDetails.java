@@ -1,9 +1,13 @@
 package com.daniele.mydatabase.userProfile.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -38,6 +42,9 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	@Column(name = "ROLE")
 	private UserRole userRole;
 	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<>();
+	
 	public UserProfileDetails() {
 	}
 	
@@ -49,6 +56,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
+		this.comments.addAll(builder.userProfile.comments);
 	}
 
 	public String getName() {
@@ -73,6 +81,10 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	
 	public UserRole getUserRole() {
 		return userRole;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override
@@ -117,6 +129,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 				+ ", nickname=" + nickname
 				+ ", password=" + password
 				+ ", role=" + userRole
+				+ ", comments=" + comments
 				+ "]";
 	}
 	
@@ -163,6 +176,16 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		
 		public UserProfileBuilder withUserRole(UserRole userRole) {
 			this.userProfile.userRole = userRole;
+			return this;
+		}
+		
+		public UserProfileBuilder withComment(Comment comment) {
+			this.userProfile.comments.add(comment);
+			return this;
+		}
+		
+		public UserProfileBuilder withComments(List<Comment> comments) {
+			this.userProfile.comments.addAll(comments);
 			return this;
 		}
 		

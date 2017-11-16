@@ -1,7 +1,5 @@
 package com.daniele.mybackend.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniele.mybackend.dto.UserProfileDto;
 import com.daniele.mybackend.service.UserProfileService;
+import com.daniele.mybackend.userProfile.dto.CommentDto;
+import com.daniele.mybackend.userProfile.dto.UserProfileDto;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @RestController
@@ -45,12 +44,10 @@ public class UserAccountRestController  {
 	
 	@GetMapping(path = "/comments")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<String> getUserCommennts() {
-		List<String> userProfileComments = new ArrayList<>(Arrays.asList(
-				"Comment from Backend 1", 
-				"A longer Comment from Backend 2", 
-				"An even longer Comment from Backend 3"));
-		return userProfileComments;
+	public List<CommentDto> getUserCommennts(@PathVariable("email") String email) {
+		return userProfileService.getCommentsByUser(email).stream()
+				.map(CommentDto::ofComment)
+				.collect(Collectors.toList());
 	}
 	
 	@PostMapping(path = "/save")

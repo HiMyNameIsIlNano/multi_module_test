@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.daniele.mybackend.service.DummyService;
-import com.daniele.mydatabase.dao.DummyDao;
+import com.daniele.mydatabase.shared.dao.DummyDao;
 
 @Service
 public class DummyServiceImpl implements DummyService {

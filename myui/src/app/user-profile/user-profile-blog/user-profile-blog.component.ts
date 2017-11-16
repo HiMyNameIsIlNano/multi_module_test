@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from "../user-profile.service";
+import { UserProfileBlogModel } from "./user-profile-blog-item/user-profile-blog.model";
 
 @Component( {
     selector: 'app-user-profile-blog',
@@ -8,15 +9,15 @@ import { UserProfileService } from "../user-profile.service";
 } )
 export class UserProfileBlogComponent implements OnInit {
 
-    public comments: string[] = [];
+    public comments: UserProfileBlogModel[] = [];
 
     constructor( private userProfileService: UserProfileService ) { }
 
     ngOnInit() {
         this.userProfileService
-            .getUserCommentList()
+            .getUserCommentList('user_1@email.com')
             .subscribe(
-            ( comments: string[] ) => {
+            ( comments: UserProfileBlogModel[] ) => {
                 this.comments = comments
             },
             ( error ) => console.log( error )
