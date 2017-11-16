@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
-import com.daniele.mycommon.dates.DateUtils;
+import com.daniele.mydatabase.shared.DateUtils;
 
 @MappedSuperclass
 public abstract class SlicedEntity extends BaseEntity {

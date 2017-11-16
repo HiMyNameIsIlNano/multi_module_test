@@ -1,7 +1,8 @@
-package com.daniele.mybackend.service;
+package com.daniele.mybackend.userProfile.service;
 
 import java.util.List;
 
+import com.daniele.mybackend.shared.service.BaseEntityService;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 

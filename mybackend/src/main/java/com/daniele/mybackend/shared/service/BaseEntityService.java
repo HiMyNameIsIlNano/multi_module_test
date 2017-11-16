@@ -1,4 +1,4 @@
-package com.daniele.mybackend.service;
+package com.daniele.mybackend.shared.service;
 
 public interface BaseEntityService<T> {
 	public Long count();

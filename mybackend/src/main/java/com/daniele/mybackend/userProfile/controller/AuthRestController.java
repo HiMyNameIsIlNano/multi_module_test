@@ -1,4 +1,4 @@
-package com.daniele.mybackend.controller;
+package com.daniele.mybackend.userProfile.controller;
 
 import java.util.Collections;
 import java.util.Map;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniele.mybackend.service.UserProfileService;
+import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mybackend.shared.TokenUtils;
 import com.daniele.mybackend.userProfile.dto.AuthDto;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
@@ -53,7 +53,7 @@ public class AuthRestController {
             UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
             token = tokenUtils.generateToken(userProfile);
         }
-        Map<String, String> authResponse = Collections.singletonMap("token", token);
+        Map<String, String> authResponse = Collections.singletonMap("com/daniele/mycommon/token", token);
 		return ResponseEntity.ok(authResponse);
 	}
 	

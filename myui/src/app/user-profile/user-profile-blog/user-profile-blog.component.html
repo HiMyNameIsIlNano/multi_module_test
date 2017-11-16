@@ -2,7 +2,9 @@
   <div *ngFor="let comment of comments" class="box-body">
   <div>
   </div>
-    <app-user-profile-blog-item [text]="comment"></app-user-profile-blog-item>
+    <app-user-profile-blog-item [text]="comment.text"
+                                [topic]="comment.topic">
+    </app-user-profile-blog-item>
   </div>
 </div>
 

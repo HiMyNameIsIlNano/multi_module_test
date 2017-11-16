@@ -1,4 +1,4 @@
-package com.daniele.mybackend.service.impl;
+package com.daniele.mybackend.shared.service.impl;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.daniele.mybackend.service.UserProfileService;
+import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mydatabase.userProfile.model.UserRole;

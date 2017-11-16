@@ -1,14 +1,15 @@
-package com.daniele.mybackend.service.impl;
+package com.daniele.mybackend.userProfile.service.impl;
 
 import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.daniele.mybackend.service.UserProfileService;
+import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;

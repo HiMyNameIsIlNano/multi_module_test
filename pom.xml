@@ -36,7 +36,6 @@
 		<module>mylogger</module>
 		<module>mybackend</module>
 		<module>mydatabase</module>
-		<module>mycommon</module>
 	</modules>
 
 	<dependencyManagement>

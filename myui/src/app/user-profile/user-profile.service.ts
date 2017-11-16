@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserProfile } from './user-profile.model';
 import { ConfigurationService } from '../shared/configuration.service';
 import 'rxjs/Rx';
-import { UserProfileBlogModel } from "./user-profile-blog/user-profile-blog-item/user-profile-blog.model";
+import { UserProfileBlogEntry } from "./user-profile-blog/user-profile-blog-item/user-profile-blog-entry.model";
 
 @Injectable()
 export class UserProfileService {
@@ -42,8 +42,8 @@ export class UserProfileService {
                 return Observable.throw( 'Error: getUserProfileList: something went wrong with your request' );
             });
     }
-    
-    getUserCommentList(email: string): Observable<UserProfileBlogModel[]> {
+
+    getUserCommentList(email: string): Observable<UserProfileBlogEntry[]> {
         return this.http.get( `${this.restUrl}/comments/{email}` )
             .map(
             (response: Response) => {

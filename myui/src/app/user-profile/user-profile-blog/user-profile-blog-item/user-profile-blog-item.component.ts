@@ -1,15 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { UserProfileBlogModel } from "./user-profile-blog.model";
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-user-profile-blog-item',
-  templateUrl: './user-profile-blog-item.component.html',
-  styleUrls: ['./user-profile-blog-item.component.css']
+  templateUrl: './user-profile-blog-item.component.html'
 })
 export class UserProfileBlogItemComponent implements OnInit {
 
-  @Input() comment: UserProfileBlogModel;
-    
+  @Input() text: string;
+  @Input() topic: string;
+
   constructor() { }
 
   ngOnInit() {

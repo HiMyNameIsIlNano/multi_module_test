@@ -18,8 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.daniele.myapp.web.security.AuthenticationTokenFilter;
 import com.daniele.myapp.web.security.EntryPointUnauthorizedHandler;
-import com.daniele.mybackend.service.LoginService;
-import com.daniele.mybackend.service.SecurityService;
+import com.daniele.mybackend.userProfile.service.LoginService;
+import com.daniele.mybackend.userProfile.service.SecurityService;
 
 @Configuration
 @EnableWebSecurity

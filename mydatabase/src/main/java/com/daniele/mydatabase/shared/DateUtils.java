@@ -1,4 +1,4 @@
-package com.daniele.mycommon.dates;
+package com.daniele.mydatabase.shared;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

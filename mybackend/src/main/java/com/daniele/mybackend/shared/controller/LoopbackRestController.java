@@ -1,4 +1,4 @@
-package com.daniele.mybackend.controller;
+package com.daniele.mybackend.shared.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

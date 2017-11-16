@@ -48,8 +48,6 @@ public class H2DataSourceInitializer {
 			comboPooledDataSource.setAcquireIncrement(acquireIncrement);
 			comboPooledDataSource.setMaxPoolSize(maxPoolSize);
 			comboPooledDataSource.setMaxStatements(maxStatements);
-		} catch (PropertyVetoException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,7 +64,7 @@ public class H2DataSourceInitializer {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "com.daniele" });
+		em.setPackagesToScan("com.daniele");
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
 		em.setJpaProperties(additionalProperties());
@@ -85,7 +83,7 @@ public class H2DataSourceInitializer {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 
-	Properties additionalProperties() {
+	private Properties additionalProperties() {
 		Properties properties = new Properties();
 
 		String showSql = env.getProperty("application.db.showSql");

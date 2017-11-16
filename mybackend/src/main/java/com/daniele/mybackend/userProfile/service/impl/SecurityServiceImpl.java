@@ -1,6 +1,6 @@
-package com.daniele.mybackend.service.impl;
+package com.daniele.mybackend.userProfile.service.impl;
 
-import com.daniele.mybackend.service.SecurityService;
+import com.daniele.mybackend.userProfile.service.SecurityService;
 
 public class SecurityServiceImpl implements SecurityService {
 

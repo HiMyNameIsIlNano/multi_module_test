@@ -1,5 +1,5 @@
-export class UserProfileBlogModel {
-    
+export class UserProfileBlogEntry {
+
     constructor(public text: string, public topic: string) {}
-    
+
 }
