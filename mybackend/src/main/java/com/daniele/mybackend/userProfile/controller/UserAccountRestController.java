@@ -42,9 +42,9 @@ public class UserAccountRestController  {
 				.collect(Collectors.toList());
 	}
 	
-	@GetMapping(path = "/comments")
+	@GetMapping(path = "/comments/{email}")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CommentDto> getUserCommennts(@PathVariable("email") String email) {
+	public List<CommentDto> getUserComments(@PathVariable("email") String email) {
 		return userProfileService.getCommentsByUser(email).stream()
 				.map(CommentDto::ofComment)
 				.collect(Collectors.toList());
