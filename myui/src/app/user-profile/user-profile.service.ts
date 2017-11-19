@@ -43,8 +43,8 @@ export class UserProfileService {
             });
     }
 
-    getUserCommentList(email: string): Observable<UserProfileBlogEntry[]> {
-        return this.http.get( `${this.restUrl}/comments/${email}` )
+    getUserCommentList(name: string): Observable<UserProfileBlogEntry[]> {
+        return this.http.get( `${this.restUrl}/comments/${name}` )
             .map(
             (response: Response) => {
                 const data = response.json();

@@ -4,11 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
@@ -39,5 +35,20 @@ public class WebMvcInitializer extends WebMvcConfigurerAdapter {
 		bean.setSuffix(".jsp");
 		return bean;
 	}
+
+	/*@Bean
+	public ContentNegotiatingViewResolver contentViewResolver() throws Exception {
+		ContentNegotiationManagerFactoryBean contentNegotiationManager = new ContentNegotiationManagerFactoryBean();
+		contentNegotiationManager.addMediaType("json", MediaType.APPLICATION_JSON);
+
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("/WEB-INF/jsp/");
+		viewResolver.setSuffix(".jsp");
+
+		ContentNegotiatingViewResolver contentViewResolver = new ContentNegotiatingViewResolver();
+		contentViewResolver.setContentNegotiationManager(contentNegotiationManager.getObject());
+		contentViewResolver.setViewResolvers(Collections.<ViewResolver>singletonList(viewResolver));
+		return contentViewResolver;
+	}*/
 
 }

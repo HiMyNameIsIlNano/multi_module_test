@@ -41,11 +41,13 @@ public class UserProfileRestController {
 				.map(UserProfileDto::ofUserProfile)
 				.collect(Collectors.toList());
 	}
-	
-	@GetMapping(path = "/comments/{email}")
+
+	// https://blog.georgovassilis.com/2015/10/29/spring-mvc-rest-controller-says-406-when-emails-are-part-url-path/
+	// http://www.baeldung.com/spring-mvc-content-negotiation-json-xml
+    @GetMapping(path = "/comments/{name}", produces = "application/json")
 	@ResponseStatus(code = HttpStatus.OK)
-	public List<CommentDto> getUserComments(@PathVariable("email") String email) {
-		return userProfileService.getCommentsByUser(email).stream()
+	public List<CommentDto> getUserComments(@PathVariable("name") String name) {
+		return userProfileService.getCommentsByUser(name).stream()
 				.map(CommentDto::ofComment)
 				.collect(Collectors.toList());
 	}

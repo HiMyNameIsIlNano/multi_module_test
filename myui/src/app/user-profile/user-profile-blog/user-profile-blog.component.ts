@@ -10,17 +10,19 @@ import {UserProfileBlogEntry} from "./user-profile-blog-item/user-profile-blog-e
 export class UserProfileBlogComponent implements OnInit {
 
   public comments: UserProfileBlogEntry[];
+  public hasComments: boolean;
 
   constructor(private userProfileService: UserProfileService) {
   }
 
   ngOnInit() {
     this.userProfileService
-      .getUserCommentList('user_1@email.com')
+      .getUserCommentList('User_1')
       .subscribe(
         (comments: UserProfileBlogEntry[]) => {
           console.log(comments);
           this.comments = comments;
+          this.hasComments = comments.length > 0;
         },
         (error) => {
           console.log(error);

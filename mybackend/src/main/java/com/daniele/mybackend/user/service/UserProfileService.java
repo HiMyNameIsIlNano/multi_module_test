@@ -10,7 +10,7 @@ public interface UserProfileService extends BaseEntityService<UserProfileDetails
 	List<UserProfileDetails> getAllUsers();
 	List<UserProfileDetails> getAllUsersSortedBySurnameAsc();
 	UserProfileDetails getUserById(Long id);
-	List<UserProfileDetails> getUsersByName(String name);
+	UserProfileDetails getUserByName(String name);
 	UserProfileDetails getUserByEmail(String email);
 	List<Comment> getCommentsByUser(String email);
 }

@@ -19,7 +19,19 @@ import java.util.List;
 public class UserProfileDaoImpl extends BaseEntityDaoImpl<UserProfileDetails> implements UserProfileDao {
 	
 	@Override
-	public List<UserProfileDetails> findByName(String name) {
+	public UserProfileDetails findByName(String name) {
+		CriteriaBuilder builder =  getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<UserProfileDetails> query = builder.createQuery(UserProfileDetails.class);
+		Root<UserProfileDetails> root = query.from(UserProfileDetails.class);
+		query.where(builder.equal(root.get(UserProfileDetails_.name), name));
+		return getEntityManager().createQuery(query).getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+	}
+
+	@Override
+	public List<UserProfileDetails> findByNameLike(String name) {
 		CriteriaBuilder builder =  getEntityManager().getCriteriaBuilder();
 		CriteriaQuery<UserProfileDetails> query = builder.createQuery(UserProfileDetails.class);
 		Root<UserProfileDetails> root = query.from(UserProfileDetails.class);

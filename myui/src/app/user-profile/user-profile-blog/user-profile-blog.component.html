@@ -1,10 +1,13 @@
 <div class="box box-primary">
-  <div *ngFor="let comment of comments" class="box-body">
-  <div>
+  <div *ngIf="!hasComments; else showComment">
+    The user has not joined any discussion yet
   </div>
-    <app-user-profile-blog-item [text]="comment.text"
-                                [topic]="comment.topic">
-    </app-user-profile-blog-item>
-  </div>
+  <ng-template #showComment>
+    <div *ngFor="let comment of comments" class="box-body">
+      <app-user-profile-blog-item [text]="comment.text"
+                                  [topic]="comment.topic">
+      </app-user-profile-blog-item>
+    </div>
+  </ng-template>
 </div>
 

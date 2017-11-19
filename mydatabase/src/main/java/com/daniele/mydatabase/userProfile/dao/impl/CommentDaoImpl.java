@@ -17,13 +17,12 @@ import java.util.List;
 public class CommentDaoImpl extends BaseEntityDaoImpl<Comment> implements CommentDao {
 
     @Override
-    public List<Comment> findCommentsByUser(String email) {
-        List<Comment> allComments = findAllComments();
+    public List<Comment> findCommentsByUser(String name) {
         CriteriaBuilder builder =  getEntityManager().getCriteriaBuilder();
         CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
         Root<UserProfileDetails> root = query.from(UserProfileDetails.class);
         Join<UserProfileDetails, Comment> join = root.join(UserProfileDetails_.comments);
-        query.select(join).where(builder.equal(root.get(UserProfileDetails_.email), email));
+        query.select(join).where(builder.equal(root.get(UserProfileDetails_.name), name));
         return getEntityManager().createQuery(query).getResultList();
     }
 

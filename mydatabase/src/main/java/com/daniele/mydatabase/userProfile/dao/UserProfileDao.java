@@ -7,7 +7,8 @@ import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 public interface UserProfileDao extends BaseEntityDao<UserProfileDetails> {
-	List<UserProfileDetails> findByName(String name);
+	UserProfileDetails findByName(String name);
 	List<UserProfileDetails> findAllAndSortBySurnameAsc();
 	UserProfileDetails findByEmail(String email);
+	List<UserProfileDetails> findByNameLike(String name);
 }

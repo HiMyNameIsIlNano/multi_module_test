@@ -41,7 +41,7 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	
 	@Override
 	@Transactional
-	public List<UserProfileDetails> getUsersByName(String name) {
+	public UserProfileDetails getUserByName(String name) {
 		return userProfileDao.findByName(name);
 	}
 	
@@ -53,7 +53,7 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	
 	@Override
 	@Transactional
-	public List<Comment> getCommentsByUser(String email) {
-		return commentDao.findCommentsByUser(email);
+	public List<Comment> getCommentsByUser(String name) {
+		return commentDao.findCommentsByUser(name);
 	}
 }
