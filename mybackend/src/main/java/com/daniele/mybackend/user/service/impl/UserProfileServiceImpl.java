@@ -1,7 +1,7 @@
-package com.daniele.mybackend.userProfile.service.impl;
+package com.daniele.mybackend.user.service.impl;
 
 import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
-import com.daniele.mybackend.userProfile.service.UserProfileService;
+import com.daniele.mybackend.user.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.dao.CommentDao;
 import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
 import com.daniele.mydatabase.userProfile.model.Comment;

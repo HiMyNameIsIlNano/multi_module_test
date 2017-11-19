@@ -1,4 +1,4 @@
-package com.daniele.mybackend.userProfile.controller;
+package com.daniele.mybackend.user.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniele.mybackend.userProfile.service.UserProfileService;
-import com.daniele.mybackend.userProfile.dto.CommentDto;
-import com.daniele.mybackend.userProfile.dto.UserProfileDto;
+import com.daniele.mybackend.user.service.UserProfileService;
+import com.daniele.mybackend.user.dto.CommentDto;
+import com.daniele.mybackend.user.dto.UserProfileDto;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @RestController

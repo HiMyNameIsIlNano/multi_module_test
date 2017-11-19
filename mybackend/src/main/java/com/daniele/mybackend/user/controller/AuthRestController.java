@@ -1,4 +1,4 @@
-package com.daniele.mybackend.userProfile.controller;
+package com.daniele.mybackend.user.controller;
 
 import java.util.Collections;
 import java.util.Map;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniele.mybackend.userProfile.service.UserProfileService;
+import com.daniele.mybackend.user.service.UserProfileService;
 import com.daniele.mybackend.shared.TokenUtils;
-import com.daniele.mybackend.userProfile.dto.AuthDto;
+import com.daniele.mybackend.user.dto.AuthDto;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mylogger.LogMethodExecution;
 

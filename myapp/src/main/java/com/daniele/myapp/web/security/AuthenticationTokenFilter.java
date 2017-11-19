@@ -1,7 +1,7 @@
 package com.daniele.myapp.web.security;
 
 import com.daniele.mybackend.shared.TokenUtils;
-import com.daniele.mybackend.userProfile.service.LoginService;
+import com.daniele.mybackend.user.service.LoginService;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,6 +1,6 @@
-package com.daniele.mybackend.userProfile.service.impl;
+package com.daniele.mybackend.user.service.impl;
 
-import com.daniele.mybackend.userProfile.service.CommentService;
+import com.daniele.mybackend.user.service.CommentService;
 import com.daniele.mydatabase.userProfile.dao.CommentDao;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import org.springframework.stereotype.Service;

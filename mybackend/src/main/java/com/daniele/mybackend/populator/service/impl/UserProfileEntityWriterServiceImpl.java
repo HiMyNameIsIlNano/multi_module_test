@@ -1,7 +1,9 @@
-package com.daniele.mybackend.shared.service.impl;
+package com.daniele.mybackend.populator.service.impl;
 
-import com.daniele.mybackend.userProfile.service.CommentService;
-import com.daniele.mybackend.userProfile.service.UserProfileService;
+import com.daniele.mybackend.populator.service.UserProfileEntityWriterService;
+import com.daniele.mybackend.populator.model.UserProfileWriterData;
+import com.daniele.mybackend.user.service.CommentService;
+import com.daniele.mybackend.user.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mydatabase.userProfile.model.UserRole;
@@ -10,10 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.Arrays;
 
 @Service
-public class EntityWriterServiceImpl {
+public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWriterService {
 
     @Inject
     private UserProfileService userProfileService;
@@ -24,9 +25,13 @@ public class EntityWriterServiceImpl {
     @Inject
     private PasswordEncoder passwordEncoder;
 
+
     @Transactional
-    public void loadUsers(int userNumber) {
+    @Override
+    public void populate(UserProfileWriterData data) {
+
         Comment commentShort, commentMedium, commentLong;
+        int userNumber = data.getUserNumber();
 
         for (int i = 0; i < userNumber; i++) {
             UserProfileDetails userProfile = UserProfileDetails.UserProfileBuilder.forCreation()

@@ -1,4 +1,4 @@
-package com.daniele.mybackend.userProfile.dto;
+package com.daniele.mybackend.user.dto;
 
 import java.time.LocalDate;
 

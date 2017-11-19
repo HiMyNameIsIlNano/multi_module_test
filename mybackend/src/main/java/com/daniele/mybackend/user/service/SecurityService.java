@@ -1,4 +1,4 @@
-package com.daniele.mybackend.userProfile.service;
+package com.daniele.mybackend.user.service;
 
 public interface SecurityService {
 	
