@@ -56,7 +56,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
-		this.comments.addAll(builder.userProfile.comments);
+		this.comments = builder.userProfile.comments;
 	}
 
 	public String getName() {
@@ -181,11 +181,15 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		
 		public UserProfileBuilder withComment(Comment comment) {
 			this.userProfile.comments.add(comment);
+			comment.setUser(this.userProfile);
 			return this;
 		}
 		
 		public UserProfileBuilder withComments(List<Comment> comments) {
-			this.userProfile.comments.addAll(comments);
+			for (Comment comment : comments) {
+				this.userProfile.comments.add(comment);
+				comment.setUser(this.userProfile);
+			}
 			return this;
 		}
 		

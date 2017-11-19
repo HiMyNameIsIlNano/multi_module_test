@@ -90,5 +90,4 @@ public class BaseEntityDaoImpl<T> implements BaseEntityDao<T> {
 		T entity = entityManager.find(clazz, id);
 		entityManager.remove(entity);
 	}
-
 }

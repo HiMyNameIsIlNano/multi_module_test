@@ -21,7 +21,7 @@ import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 
 @RestController
 @RequestMapping("user-rest")
-public class UserAccountRestController  {
+public class UserProfileRestController {
 
 	@Inject
 	private UserProfileService userProfileService;

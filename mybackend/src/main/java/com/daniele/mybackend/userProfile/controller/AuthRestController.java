@@ -53,7 +53,7 @@ public class AuthRestController {
             UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
             token = tokenUtils.generateToken(userProfile);
         }
-        Map<String, String> authResponse = Collections.singletonMap("com/daniele/mycommon/token", token);
+        Map<String, String> authResponse = Collections.singletonMap("token", token);
 		return ResponseEntity.ok(authResponse);
 	}
 	

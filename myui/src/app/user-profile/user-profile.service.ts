@@ -18,7 +18,7 @@ export class UserProfileService {
     }
 
     getUserProfile(id: number): Observable<UserProfile> {
-        return this.http.get( `${this.restUrl}/user/{id}` )
+        return this.http.get( `${this.restUrl}/user/${id}` )
             .map(
             (response: Response) => {
                 const data = response.json();
@@ -44,7 +44,7 @@ export class UserProfileService {
     }
 
     getUserCommentList(email: string): Observable<UserProfileBlogEntry[]> {
-        return this.http.get( `${this.restUrl}/comments/{email}` )
+        return this.http.get( `${this.restUrl}/comments/${email}` )
             .map(
             (response: Response) => {
                 const data = response.json();

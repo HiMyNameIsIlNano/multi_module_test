@@ -10,5 +10,4 @@ public interface UserProfileDao extends BaseEntityDao<UserProfileDetails> {
 	List<UserProfileDetails> findByName(String name);
 	List<UserProfileDetails> findAllAndSortBySurnameAsc();
 	UserProfileDetails findByEmail(String email);
-	List<Comment> findCommentsByUser(UserProfileDetails userProfileDetails);
 }

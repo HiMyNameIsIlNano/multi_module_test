@@ -23,12 +23,7 @@ public class Comment extends SlicedEntity {
 	@Column(name="comment_topic")
 	private String topic;
 	
-	@ManyToOne(cascade={
-			CascadeType.DETACH, 
-			CascadeType.MERGE, 
-			CascadeType.PERSIST, 
-			CascadeType.REFRESH
-	})
+	@ManyToOne
 	@JoinColumn(name="user_id_ref")
 	private UserProfileDetails user;
 	
@@ -37,6 +32,7 @@ public class Comment extends SlicedEntity {
 	private Comment(CommentBuilder builder) {
 		this.text = builder.comment.text;
 		this.topic = builder.comment.topic;
+		this.user = builder.comment.user;
 	}
 
 	public String getText() {
@@ -45,6 +41,14 @@ public class Comment extends SlicedEntity {
 
 	public String getTopic() {
 		return topic;
+	}
+
+    public UserProfileDetails getUser() {
+        return user;
+    }
+
+	protected void setUser(UserProfileDetails user) {
+		this.user = user;
 	}
 
 	@Override
@@ -59,6 +63,10 @@ public class Comment extends SlicedEntity {
 		public static CommentBuilder forCreation() {
 			return new CommentBuilder(new Comment());
 		}
+
+        public static CommentBuilder forUpdate(Comment comment) {
+            return new CommentBuilder(comment);
+        }
 		
 		private CommentBuilder(Comment comment) {
 			this.comment = comment;
@@ -73,6 +81,11 @@ public class Comment extends SlicedEntity {
 			comment.topic = topic;
 			return this;
 		}
+
+        public CommentBuilder withUser(UserProfileDetails user) {
+            comment.user = user;
+            return this;
+        }
 
 		public Comment build() {
 			return new Comment(this);
