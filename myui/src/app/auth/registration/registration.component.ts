@@ -15,7 +15,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegistration(form: NgForm) {
-      const userProfile = new UserProfile(form.value.name
+      const userProfile = new UserProfile('http://vignette4.wikia.nocookie.net/scribblenauts/images/4/42/Crash_Test_Dummy.png/revision/latest?cb=20130309213400'
+              , form.value.name
               , form.value.surname
               , form.value.nickname
               , form.value.email

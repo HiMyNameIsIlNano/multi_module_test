@@ -24,6 +24,9 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	@Transient
 	private static final long serialVersionUID = -2470335388023065464L;
 	
+	@Column(name = "IMG_PATH")
+	private String imgPath;
+	
 	@Column(name = "NAME")
 	private String name;
 	
@@ -51,12 +54,17 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	private UserProfileDetails(UserProfileBuilder builder) {
 		this.id = builder.userProfile.id;
 		this.name = builder.userProfile.name;
+		this.imgPath = builder.userProfile.imgPath;
 		this.surname = builder.userProfile.surname;
 		this.email = builder.userProfile.email;
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
 		this.comments = builder.userProfile.comments;
+	}
+
+	public String getImgPath() {
+		return imgPath;
 	}
 
 	public String getName() {
@@ -149,6 +157,11 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 			this.userProfile = userProfile;
 		}
 		
+		public UserProfileBuilder withImgPath(String imgPath) {
+			this.userProfile.imgPath = imgPath;
+			return this;
+		}
+		
 		public UserProfileBuilder withName(String name) {
 			this.userProfile.name = name;
 			return this;
@@ -181,14 +194,19 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		
 		public UserProfileBuilder withComment(Comment comment) {
 			this.userProfile.comments.add(comment);
-			comment.setUser(this.userProfile);
+			Comment.CommentBuilder
+				.forUpdate(comment)
+				.withUser(this.userProfile);
+			
 			return this;
 		}
 		
 		public UserProfileBuilder withComments(List<Comment> comments) {
 			for (Comment comment : comments) {
 				this.userProfile.comments.add(comment);
-				comment.setUser(this.userProfile);
+				Comment.CommentBuilder
+					.forUpdate(comment)
+					.withUser(this.userProfile);
 			}
 			return this;
 		}

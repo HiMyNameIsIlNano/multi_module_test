@@ -35,7 +35,8 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
 
         for (int i = 0; i < userNumber; i++) {
             UserProfileDetails userProfile = UserProfileDetails.UserProfileBuilder.forCreation()
-                    .withName("User_" + i)
+                    .withImgPath("http://vignette4.wikia.nocookie.net/scribblenauts/images/4/42/Crash_Test_Dummy.png/revision/latest?cb=20130309213400")
+            		.withName("User_" + i)
                     .withSurname("Surname_" + i)
                     .withNickname("Nickname_" + i)
                     .withEmail("user_" + i + "@email.com")

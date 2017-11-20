@@ -1,8 +1,8 @@
-<h2>User(s) Table</h2>
-<p>User(s) List:</p>
+<h2>My Friend(s)</h2>
 <table class="table table-striped">
 	<thead>
 		<tr>
+			<th>Avatar</th>
 			<th>Firstname</th>
 			<th>Lastname</th>
 			<th>Email</th>
@@ -10,6 +10,9 @@
 	</thead>
 	<tbody>
 		<tr *ngFor="let userProfile of userProfiles">
+			<td>
+				<img [src]="userProfile.imgPath" alt="{{ userProfile.name }}" class="img-responsive" style="max-height: 50px;">
+			</td>
 			<td>{{ userProfile.name }}</td>
 			<td>{{ userProfile.surname }}</td>
 			<td>{{ userProfile.nickname }}</td>

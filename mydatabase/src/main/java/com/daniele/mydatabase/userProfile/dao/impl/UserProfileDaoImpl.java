@@ -1,19 +1,18 @@
 package com.daniele.mydatabase.userProfile.dao.impl;
 
-import com.daniele.mydatabase.shared.dao.impl.BaseEntityDaoImpl;
-import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
-import com.daniele.mydatabase.userProfile.model.Comment;
-import com.daniele.mydatabase.userProfile.model.Comment_;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails_;
-import com.daniele.mylogger.LogExecutionTime;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.daniele.mydatabase.shared.dao.impl.BaseEntityDaoImpl;
+import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails_;
+import com.daniele.mylogger.LogExecutionTime;
 
 @Repository
 public class UserProfileDaoImpl extends BaseEntityDaoImpl<UserProfileDetails> implements UserProfileDao {

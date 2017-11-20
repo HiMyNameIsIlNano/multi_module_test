@@ -8,6 +8,7 @@ import com.daniele.mydatabase.userProfile.model.UserProfileDetails.UserProfileBu
 public class UserProfileDto {
 
 	Long id;
+	String imgPath;
 	String name;
 	String surname;
 	String email;
@@ -27,6 +28,14 @@ public class UserProfileDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public String getName() {
@@ -104,11 +113,11 @@ public class UserProfileDto {
 	public static UserProfileDto ofUserProfile(UserProfileDetails userProfile) {
 		UserProfileDto userProfileDto = new UserProfileDto();
 		userProfileDto.setId(userProfile.getId());
+		userProfileDto.setImgPath(userProfile.getImgPath());
 		userProfileDto.setName(userProfile.getName());
 		userProfileDto.setSurname(userProfile.getSurname());
 		userProfileDto.setNickname(userProfile.getNickname());
 		userProfileDto.setEmail(userProfile.getEmail());
-		userProfileDto.setPassword(userProfile.getPassword());
 		userProfileDto.setLastUpdate(userProfile.getLastUpdate());
 		userProfileDto.setUpdatedBy(userProfile.getUpdatedBy());
 		userProfileDto.setValidFrom(userProfile.getValidFrom());
@@ -120,6 +129,7 @@ public class UserProfileDto {
 	public static UserProfileDetails fromDto(UserProfileDto userProfileDto) {
 		UserProfileDetails userProfile = UserProfileBuilder.forCreation()
 				.withName(userProfileDto.getName())
+				.withImgPath(userProfileDto.getImgPath())
 				.withSurname(userProfileDto.getSurname())
 				.withNickname(userProfileDto.getNickname())
 				.withEmail(userProfileDto.getEmail())

@@ -47,10 +47,6 @@ public class Comment extends SlicedEntity {
         return user;
     }
 
-	protected void setUser(UserProfileDetails user) {
-		this.user = user;
-	}
-
 	@Override
 	public String toString() {
 		return "Comment [text=" + text + ", topic=" + topic + "]";
