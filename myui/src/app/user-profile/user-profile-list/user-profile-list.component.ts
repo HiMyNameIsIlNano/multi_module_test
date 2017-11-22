@@ -11,6 +11,7 @@ import { AuthService } from '../../auth/auth.service';
 export class UserProfileListComponent implements OnInit {
 
     public userProfiles: UserProfile[];
+    public hasFriends: boolean;
 
     constructor( private userProfileService: UserProfileService, private authService: AuthService ) { }
 
@@ -20,6 +21,7 @@ export class UserProfileListComponent implements OnInit {
             .subscribe(
             ( userProfiles: UserProfile[] ) => {
                 this.userProfiles = userProfiles;
+                this.hasFriends = userProfiles.length > 0;
             },
             ( error ) => console.log( error )
             );

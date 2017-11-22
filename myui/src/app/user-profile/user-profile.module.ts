@@ -6,6 +6,7 @@ import {UserProfileBlogItemComponent} from "./user-profile-blog/user-profile-blo
 import {FormsModule} from "@angular/forms";
 import {UserProfileRoutingModule} from "./user-profile-routing.module";
 import { UserProfileComponent } from './user-profile.component';
+import { UserProfileListItemComponent } from "./user-profile-list/user-profile-list-item/user-profile-list-item.component";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { UserProfileComponent } from './user-profile.component';
     UserProfileListComponent,
     UserProfileBlogComponent,
     UserProfileBlogItemComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserProfileListItemComponent
   ]
 })
 export class UserProfileModule { }

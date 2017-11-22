@@ -1,9 +1,9 @@
 package com.daniele.mydatabase.userProfile.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -18,6 +18,7 @@ public class Comment extends SlicedEntity {
 	private static final long serialVersionUID = -4078057003770178175L;
 
 	@Column(name="comment_text")
+	@Lob
 	private String text;
 	
 	@Column(name="comment_topic")

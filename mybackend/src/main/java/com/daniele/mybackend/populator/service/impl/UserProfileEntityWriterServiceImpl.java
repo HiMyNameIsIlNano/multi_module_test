@@ -49,11 +49,26 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
             userProfileService.save(userProfile);
         }
 
+        String textShort = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
+        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. ";
+        
+        String textMedium = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
+        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
+        		+ "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
+        		+ "Manduma pindureta quium dia nois paga. ";
+        
+        String textLong = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
+        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
+        		+ "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
+        		+ "Manduma pindureta quium dia nois paga. "
+        		+ "Sapien in monti palavris qui num significa nadis i pareci latim. "
+        		+ "Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.";
+        
         for (int i = 0; i < userNumber; i++) {
             UserProfileDetails fromDb = userProfileService.getUserByEmail("user_" + i + "@email.com");
 
             commentShort = Comment.CommentBuilder.forCreation()
-                    .withText("Comment Short! from U_" + i)
+                    .withText(textShort)
                     .withTopic("Geography")
                     .withUser(fromDb)
                     .build();
@@ -62,7 +77,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
             commentService.save(commentShort);
 
             commentMedium = Comment.CommentBuilder.forCreation()
-                    .withText("Comment Medium! From Usr_" + i)
+                    .withText(textMedium)
                     .withTopic("Science")
                     .withUser(fromDb)
                     .build();
@@ -70,7 +85,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
             commentService.save(commentMedium);
 
             commentLong = Comment.CommentBuilder.forCreation()
-                    .withText("Comment Long! From User_" + i)
+                    .withText(textLong)
                     .withTopic("History")
                     .withUser(fromDb)
                     .build();
