@@ -1,16 +1,11 @@
 package com.daniele.myapp.db.config;
 
-import java.beans.PropertyVetoException;
-import java.sql.SQLException;
-import java.util.Properties;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.flywaydb.core.Flyway;
 import org.h2.tools.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -19,13 +14,26 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javax.inject.Inject;
+import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.Properties;
 
 @Configuration
 public class H2DataSourceInitializer {
 
 	@Inject
 	private Environment env;
+
+	@Bean(initMethod = "migrate")
+	Flyway flyway() {
+		Flyway flyway = new Flyway();
+		flyway.setBaselineOnMigrate(true);
+		flyway.setLocations("filesystem:../mydatabase/src/main/resources/migrations");
+		flyway.setDataSource(dataSource());
+		return flyway;
+	}
 
 	// jdbc:h2:mem:testdb
 	@Bean
@@ -61,6 +69,7 @@ public class H2DataSourceInitializer {
 	}
 
 	@Bean
+	@DependsOn("flyway")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
