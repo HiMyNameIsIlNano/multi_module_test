@@ -100,6 +100,35 @@
 				<plugin>
 					<groupId>org.jooq</groupId>
 					<artifactId>jooq-codegen-maven</artifactId>
+					<version>${org.jooq.version}</version>
+
+					<!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation -->
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+
+					<!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
+					<configuration>
+						<jdbc>
+							<url>jdbc:h2:mem:testdb</url>
+							<user>sa</user>
+						</jdbc>
+						<generator>
+							<database>
+								<includes>.*</includes>
+								<inputSchema>public</inputSchema>
+							</database>
+							<target>
+								<packageName>com.daniele.mydatabase</packageName>
+								<directory>${project.build.directory}/target/generated-sources/annotations/jooq-h2</directory>
+							</target>
+						</generator>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { UserProfile } from './user-profile.model';
-import { ConfigurationService } from '../shared/configuration.service';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {UserProfile} from './user-profile.model';
+import {ConfigurationService} from '../shared/configuration.service';
 import 'rxjs/Rx';
-import { UserProfileBlogEntry } from "./user-profile-blog/user-profile-blog-item/user-profile-blog-entry.model";
+import {UserProfileBlogEntry} from "./user-profile-blog/user-profile-blog-item/user-profile-blog-item.model";
 
 @Injectable()
 export class UserProfileService {

@@ -13,4 +13,5 @@ public interface UserProfileService extends BaseEntityService<UserProfileDetails
 	UserProfileDetails getUserByName(String name);
 	UserProfileDetails getUserByEmail(String email);
 	List<Comment> getCommentsByUser(String email);
+	List<UserProfileDetails> findWithException();
 }

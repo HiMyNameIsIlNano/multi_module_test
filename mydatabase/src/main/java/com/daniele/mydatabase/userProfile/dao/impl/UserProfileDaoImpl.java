@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.daniele.mylogger.LogMethodException;
 import org.springframework.stereotype.Repository;
 
 import com.daniele.mydatabase.shared.dao.impl.BaseEntityDaoImpl;
@@ -60,5 +61,12 @@ public class UserProfileDaoImpl extends BaseEntityDaoImpl<UserProfileDetails> im
 				.findFirst()
 				.orElse(null);
 	}
+
+	@Override
+	@LogMethodException
+	public List<UserProfileDetails> findWithException() {
+		throw new RuntimeException("Just a test");
+	}
+
 
 }

@@ -47,6 +47,8 @@ public class UserProfileRestController {
     @GetMapping(path = "/comments/{name}", produces = "application/json")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<CommentDto> getUserComments(@PathVariable("name") String name) {
+		//userProfileService.findWithException();
+
 		return userProfileService.getCommentsByUser(name).stream()
 				.map(CommentDto::ofComment)
 				.collect(Collectors.toList());

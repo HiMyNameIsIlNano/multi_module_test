@@ -2,6 +2,7 @@ package com.daniele.mylogger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -48,14 +49,12 @@ public class LoggerAspect {
 	public Object aroundFindAllLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
 		Instant starts = Instant.now();
-		
-		Object result = null;
-		
+
+		Object result;
+
 		try {
-			result = proceedingJoinPoint.proceed();	
+			result = proceedingJoinPoint.proceed();
 		} catch (Exception e) {
-			// This could be good for a monitoring tool!
-			logger.info("Method: " + signature + "threw an exception, Exception: " + e.getMessage());
 			throw e;
 		}
 		
@@ -68,6 +67,31 @@ public class LoggerAspect {
         return result;
 	}
 
+	/*@Around("@annotation(LogMethodException)")
+	public Object atMethodException(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
+
+        Object result;
+
+        try {
+            result = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            logMethodException(signature, e);
+            throw e;
+        }
+
+        List<String> parameterList = getParameterList(proceedingJoinPoint.getArgs());
+        logMethodInfo(signature, parameterList);
+
+        return result;
+	}*/
+
+    @AfterThrowing(pointcut="execution(@LogMethodException * *(..))", throwing="ex")
+    public void atMethodException(JoinPoint jp, RuntimeException ex) throws Throwable {
+        System.out.println("Exception thrown by: " + jp.getSignature().getName());
+        throw ex;
+    }
+
     private void logMethodInfo(@NotNull MethodSignature signature, @NotNull List<String> parameterList) {
         logger.info("Method: " + signature.getMethod().getName()
                 + ", Class: " + signature.getDeclaringType().getName()
@@ -78,6 +102,11 @@ public class LoggerAspect {
 
     private void logMethodDuration(Instant starts, Instant ends) {
 	    logger.info("Duration: " + Duration.between(starts, ends).toMillis());
+    }
+
+    private void logMethodException(MethodSignature signature, Throwable e) {
+	    logger.info("An exception occurred during the execution of: " + signature.getMethod().getName()
+                + ", Exception: " + e.getLocalizedMessage());
     }
 
     private List<String> getParameterList(Object[] parameters) {

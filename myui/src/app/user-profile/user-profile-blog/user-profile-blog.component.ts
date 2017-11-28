@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserProfileService} from "../user-profile.service";
-import {UserProfileBlogEntry} from "./user-profile-blog-item/user-profile-blog-entry.model";
+import {UserProfileBlogEntry} from "./user-profile-blog-item/user-profile-blog-item.model";
 
 @Component({
   selector: 'app-user-profile-blog',

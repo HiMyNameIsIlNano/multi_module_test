@@ -56,4 +56,10 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	public List<Comment> getCommentsByUser(String name) {
 		return commentDao.findCommentsByUser(name);
 	}
+
+	@Override
+	@Transactional
+	public List<UserProfileDetails> findWithException() {
+		return userProfileDao.findWithException();
+	}
 }
