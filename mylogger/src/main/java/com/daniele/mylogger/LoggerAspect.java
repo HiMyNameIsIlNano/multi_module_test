@@ -87,8 +87,8 @@ public class LoggerAspect {
 	}*/
 
     @AfterThrowing(pointcut="execution(@LogMethodException * *(..))", throwing="ex")
-    public void atMethodException(JoinPoint jp, RuntimeException ex) throws Throwable {
-        System.out.println("Exception thrown by: " + jp.getSignature().getName());
+    public void atMethodException(JoinPoint jp, Exception ex) throws Throwable {
+        logMethodException(jp, ex);
         throw ex;
     }
 
@@ -104,8 +104,8 @@ public class LoggerAspect {
 	    logger.info("Duration: " + Duration.between(starts, ends).toMillis());
     }
 
-    private void logMethodException(MethodSignature signature, Throwable e) {
-	    logger.info("An exception occurred during the execution of: " + signature.getMethod().getName()
+    private void logMethodException(JoinPoint jp, Exception e) {
+	    logger.info("An exception occurred during the execution of: " + jp.getSignature().getName()
                 + ", Exception: " + e.getLocalizedMessage());
     }
 
