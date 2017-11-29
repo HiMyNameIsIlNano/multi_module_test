@@ -1,4 +1,4 @@
-<h2>My Friend(s)</h2>
+<!-- <h2>My Friend(s)</h2>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -19,3 +19,7 @@
 		</tr>
 	</tbody>
 </table>
+ -->
+<div *ngFor="let userProfile of userProfiles">
+	<app-user-profile-list-item [userProfile]="userProfile"></app-user-profile-list-item>
+</div>
