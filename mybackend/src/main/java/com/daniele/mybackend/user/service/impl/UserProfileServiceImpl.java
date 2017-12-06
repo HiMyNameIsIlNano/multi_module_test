@@ -1,16 +1,18 @@
 package com.daniele.mybackend.user.service.impl;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.jooq.Record2;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
 import com.daniele.mybackend.user.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.dao.CommentDao;
 import com.daniele.mydatabase.userProfile.dao.UserProfileDao;
-import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.inject.Inject;
-import java.util.List;
 
 @Service
 public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDetails> implements UserProfileService {
@@ -53,8 +55,8 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	
 	@Override
 	@Transactional
-	public List<Comment> getCommentsByUser(String name) {
-		return commentDao.findCommentsByUser(name);
+	public List<Record2<String,String>> getCommentsByUser(String name) {
+		return commentDao.findCommentsWithJooq(name);
 	}
 
 	@Override

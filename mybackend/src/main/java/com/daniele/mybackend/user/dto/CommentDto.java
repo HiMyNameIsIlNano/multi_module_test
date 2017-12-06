@@ -1,6 +1,7 @@
 package com.daniele.mybackend.user.dto;
 
-import com.daniele.mydatabase.userProfile.model.Comment;
+import org.jooq.Record2;
+import org.jooq.generated.tables.UserComment;
 
 public class CommentDto {
 
@@ -20,7 +21,9 @@ public class CommentDto {
 		return topic;
 	}
 	
-	public static CommentDto ofComment(Comment comment) {
-		return new CommentDto(comment.getText(), comment.getTopic());
+	public static CommentDto ofResult(Record2<String,String> comment) {
+		String text = comment.get(UserComment.USER_COMMENT.COMMENT_TEXT);
+		String topic = comment.get(UserComment.USER_COMMENT.COMMENT_TOPIC);
+		return new CommentDto(text, topic);
 	}
 }

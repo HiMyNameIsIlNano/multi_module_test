@@ -50,7 +50,7 @@ public class UserProfileRestController {
 		//userProfileService.findWithException();
 
 		return userProfileService.getCommentsByUser(name).stream()
-				.map(CommentDto::ofComment)
+				.map(CommentDto::ofResult)
 				.collect(Collectors.toList());
 	}
 	

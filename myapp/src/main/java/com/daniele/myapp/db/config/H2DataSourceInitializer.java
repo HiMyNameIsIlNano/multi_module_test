@@ -1,13 +1,22 @@
 package com.daniele.myapp.db.config;
 
+import com.daniele.mydatabase.shared.JOOQToSpringExceptionTransformer;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.flywaydb.core.Flyway;
 import org.h2.tools.Server;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DataSourceConnectionProvider;
+import org.jooq.impl.DefaultConfiguration;
+import org.jooq.impl.DefaultDSLContext;
+import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -39,7 +48,7 @@ public class H2DataSourceInitializer {
 	@Bean
 	public DataSource dataSource() {
 		ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
-				
+
 		try {
 			comboPooledDataSource.setDriverClass(env.getProperty("application.driver.class"));
 			comboPooledDataSource.setJdbcUrl(env.getProperty("application.db.url"));
@@ -90,6 +99,48 @@ public class H2DataSourceInitializer {
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	@Bean
+	public LazyConnectionDataSourceProxy lazyConnectionDataSource() {
+		return new LazyConnectionDataSourceProxy(dataSource());
+	}
+
+	@Bean
+	public TransactionAwareDataSourceProxy transactionAwareDataSource() {
+		return new TransactionAwareDataSourceProxy(lazyConnectionDataSource());
+	}
+
+	@Bean
+	public DataSourceTransactionManager transactionManager() {
+		return new DataSourceTransactionManager(lazyConnectionDataSource());
+	}
+
+	@Bean
+	public DataSourceConnectionProvider connectionProvider() {
+		return new DataSourceConnectionProvider(transactionAwareDataSource());
+	}
+
+	@Bean
+	public JOOQToSpringExceptionTransformer jooqToSpringExceptionTransformer() {
+		return new JOOQToSpringExceptionTransformer();
+	}
+
+	@Bean
+	public DefaultConfiguration configuration() {
+		DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
+
+		jooqConfiguration.set(connectionProvider());
+		jooqConfiguration.set(new DefaultExecuteListenerProvider(jooqToSpringExceptionTransformer()));
+
+		jooqConfiguration.set(SQLDialect.H2);
+
+		return jooqConfiguration;
+	}
+
+	@Bean
+	public DefaultDSLContext dsl() {
+		return new DefaultDSLContext(configuration());
 	}
 
 	private Properties additionalProperties() {
