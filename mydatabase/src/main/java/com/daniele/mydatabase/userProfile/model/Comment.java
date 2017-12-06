@@ -47,6 +47,43 @@ public class Comment extends SlicedEntity {
     public UserProfileDetails getUser() {
         return user;
     }
+    
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((text == null) ? 0 : text.hashCode());
+		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		if (text == null) {
+			if (other.text != null)
+				return false;
+		} else if (!text.equals(other.text))
+			return false;
+		if (topic == null) {
+			if (other.topic != null)
+				return false;
+		} else if (!topic.equals(other.topic))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 
 	@Override
 	public String toString() {

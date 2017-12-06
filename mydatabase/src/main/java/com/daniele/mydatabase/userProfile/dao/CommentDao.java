@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface CommentDao extends BaseEntityDao<Comment> {
     List<Comment> findCommentsByUser(String email);
+    List<Comment> findCommentsWithJooq(String email);
     List<Comment> findAllComments();
 }

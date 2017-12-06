@@ -92,6 +92,7 @@
                         <configuration>
                             <sources>
                                 <source>${project.build.directory}/generated-sources/annotations</source>
+                                <source>${project.build.directory}/generated-sources/jooq</source>
                             </sources>
                         </configuration>
                         <goals>

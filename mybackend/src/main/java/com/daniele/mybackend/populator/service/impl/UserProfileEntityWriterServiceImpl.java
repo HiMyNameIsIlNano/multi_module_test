@@ -25,7 +25,6 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
     @Inject
     private PasswordEncoder passwordEncoder;
 
-
     @Transactional
     @Override
     public void populate(UserProfileWriterData data) {

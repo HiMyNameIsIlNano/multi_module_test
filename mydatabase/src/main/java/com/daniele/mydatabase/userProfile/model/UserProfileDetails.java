@@ -1,13 +1,9 @@
 package com.daniele.mydatabase.userProfile.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,10 +40,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	
 	@Column(name = "ROLE")
 	private UserRole userRole;
-	
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
-	
+		
 	public UserProfileDetails() {
 	}
 	
@@ -60,7 +53,6 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
-		this.comments = builder.userProfile.comments;
 	}
 
 	public String getImgPath() {
@@ -91,10 +83,6 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		return userRole;
 	}
 	
-	public List<Comment> getComments() {
-		return comments;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(getUserRole().getAuthority());
@@ -137,7 +125,6 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 				+ ", nickname=" + nickname
 				+ ", password=" + password
 				+ ", role=" + userRole
-				+ ", comments=" + comments
 				+ "]";
 	}
 	
@@ -189,25 +176,6 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		
 		public UserProfileBuilder withUserRole(UserRole userRole) {
 			this.userProfile.userRole = userRole;
-			return this;
-		}
-		
-		public UserProfileBuilder withComment(Comment comment) {
-			this.userProfile.comments.add(comment);
-			Comment.CommentBuilder
-				.forUpdate(comment)
-				.withUser(this.userProfile);
-			
-			return this;
-		}
-		
-		public UserProfileBuilder withComments(List<Comment> comments) {
-			for (Comment comment : comments) {
-				this.userProfile.comments.add(comment);
-				Comment.CommentBuilder
-					.forUpdate(comment)
-					.withUser(this.userProfile);
-			}
 			return this;
 		}
 		

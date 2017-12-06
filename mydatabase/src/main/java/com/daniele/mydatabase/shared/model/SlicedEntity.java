@@ -52,5 +52,42 @@ public abstract class SlicedEntity extends BaseEntity {
 	public String getUpdatedBy() {
 		return updatedBy;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((updatedBy == null) ? 0 : updatedBy.hashCode());
+		result = prime * result + ((validFrom == null) ? 0 : validFrom.hashCode());
+		result = prime * result + ((validTo == null) ? 0 : validTo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SlicedEntity other = (SlicedEntity) obj;
+		if (updatedBy == null) {
+			if (other.updatedBy != null)
+				return false;
+		} else if (!updatedBy.equals(other.updatedBy))
+			return false;
+		if (validFrom == null) {
+			if (other.validFrom != null)
+				return false;
+		} else if (!validFrom.equals(other.validFrom))
+			return false;
+		if (validTo == null) {
+			if (other.validTo != null)
+				return false;
+		} else if (!validTo.equals(other.validTo))
+			return false;
+		return true;
+	}
+
 }

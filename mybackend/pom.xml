@@ -90,6 +90,7 @@
                 <executions>
                     <execution>
                         <id>compile_with_aspectj</id>
+                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
