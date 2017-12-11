@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.daniele.mybackend.shared.service.BaseEntityService;
-import com.daniele.mydatabase.shared.dao.BaseEntityDao;
+import com.daniele.mybackend.shared.dao.BaseEntityDao;
 
 public class BaseEntityServiceImpl<T> implements BaseEntityService<T> {
 	

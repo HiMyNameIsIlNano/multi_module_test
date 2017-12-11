@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.shared;
+package com.daniele.mybackend.shared;
 
 import org.jooq.ExecuteContext;
 import org.jooq.SQLDialect;

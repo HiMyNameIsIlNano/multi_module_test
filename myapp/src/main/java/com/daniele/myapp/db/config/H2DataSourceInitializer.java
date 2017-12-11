@@ -1,6 +1,6 @@
 package com.daniele.myapp.db.config;
 
-import com.daniele.mydatabase.shared.JOOQToSpringExceptionTransformer;
+import com.daniele.mybackend.shared.JOOQToSpringExceptionTransformer;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.flywaydb.core.Flyway;
 import org.h2.tools.Server;
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
@@ -22,6 +23,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +32,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages="com.daniele.mydatabase", entityManagerFactoryRef="entityManagerFactory")
 public class H2DataSourceInitializer {
 
 	@Inject
@@ -129,12 +133,9 @@ public class H2DataSourceInitializer {
 	@Bean
 	public DefaultConfiguration configuration() {
 		DefaultConfiguration jooqConfiguration = new DefaultConfiguration();
-
 		jooqConfiguration.set(connectionProvider());
 		jooqConfiguration.set(new DefaultExecuteListenerProvider(jooqToSpringExceptionTransformer()));
-
 		jooqConfiguration.set(SQLDialect.H2);
-
 		return jooqConfiguration;
 	}
 

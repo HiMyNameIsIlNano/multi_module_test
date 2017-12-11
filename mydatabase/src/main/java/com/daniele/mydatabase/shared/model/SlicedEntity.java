@@ -1,13 +1,13 @@
 package com.daniele.mydatabase.shared.model;
 
+import com.daniele.mydatabase.DateUtils;
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-
-import com.daniele.mydatabase.shared.DateUtils;
 
 @MappedSuperclass
 public abstract class SlicedEntity extends BaseEntity {

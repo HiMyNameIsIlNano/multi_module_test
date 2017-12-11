@@ -2,8 +2,8 @@ package com.daniele.mybackend.populator.service.impl;
 
 import com.daniele.mybackend.populator.service.UserProfileEntityWriterService;
 import com.daniele.mybackend.populator.model.UserProfileWriterData;
-import com.daniele.mybackend.user.service.CommentService;
-import com.daniele.mybackend.user.service.UserProfileService;
+import com.daniele.mybackend.userProfile.service.CommentService;
+import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mydatabase.userProfile.model.UserRole;

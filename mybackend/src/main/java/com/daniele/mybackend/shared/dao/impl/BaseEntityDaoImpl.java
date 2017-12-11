@@ -1,4 +1,4 @@
-package com.daniele.mydatabase.shared.dao.impl;
+package com.daniele.mybackend.shared.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.daniele.mydatabase.shared.dao.BaseEntityDao;
+import com.daniele.mybackend.shared.dao.BaseEntityDao;
 
 public class BaseEntityDaoImpl<T> implements BaseEntityDao<T> {
 	

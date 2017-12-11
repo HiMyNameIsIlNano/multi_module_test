@@ -14,17 +14,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>multi.module.test.mylogger</groupId>
-            <artifactId>mylogger</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
@@ -35,102 +24,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-meta-extensions</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <configuration>
-                            <sources>
-                                <source>${project.build.directory}/generated-sources/annotations</source>
-                                <source>${project.build.directory}/generated-sources/jooq</source>
-                            </sources>
-                        </configuration>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                
-                <executions>
-						<execution>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
-
-					<!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
-					<configuration>
-						<generator>
-							<database>
-								<name>org.jooq.util.jpa.JPADatabase</name>
-								<properties>
-									<!-- A comma separated list of Java packages, that contain your entities -->
-									<property>
-										<key>packages</key>
-										<value>com.daniele.mydatabase</value>
-									</property>
-								</properties>
-							</database>
-						</generator>
-					</configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

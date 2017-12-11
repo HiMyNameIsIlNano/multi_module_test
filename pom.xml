@@ -14,6 +14,7 @@
 		<jdk.version>1.8</jdk.version>
 		<spring.version>4.3.10.RELEASE</spring.version>
 		<spring.security.version>4.2.3.RELEASE</spring.security.version>
+		<spring.data.version>2.0.2.RELEASE</spring.data.version>
 		<hibernate.version>5.2.10.Final</hibernate.version>
 		<h2.version>1.4.196</h2.version>
 		<c3p0.version>0.9.5.2</c3p0.version>
@@ -69,7 +70,7 @@
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-jpa</artifactId>
-				<version>${spring.version}</version>
+				<version>${spring.data.version}</version>
 			</dependency>
 
 			<dependency>
@@ -109,13 +110,13 @@
 				<version>${javax.inject.version}</version>
 			</dependency>
 
-            <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>2.0.0.Final</version>
-            </dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>2.0.0.Final</version>
+			</dependency>
 
-            <dependency>
+			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate.version}</version>
@@ -270,6 +271,7 @@
 							<configuration>
 								<sources>
 									<source>${project.build.directory}/generated-sources/annotations</source>
+									<source>${project.build.directory}/generated-sources/jooq</source>
 								</sources>
 							</configuration>
 							<goals>
@@ -313,9 +315,11 @@
 					<artifactId>jooq-codegen-maven</artifactId>
 					<version>${org.jooq.version}</version>
 
-					<!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation -->
+					<!-- The jOOQ code generation plugin is also executed in the generate-sources 
+						phase, prior to compilation -->
 					<executions>
 						<execution>
+							<id>jooq-codegen</id>
 							<phase>generate-sources</phase>
 							<goals>
 								<goal>generate</goal>
@@ -323,19 +327,25 @@
 						</execution>
 					</executions>
 
-					<!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
+					<!-- This is a minimal working configuration. See the manual's section 
+						about the code generator for more details -->
 					<configuration>
 						<generator>
 							<database>
 								<name>org.jooq.util.jpa.JPADatabase</name>
 								<properties>
-									<!-- A comma separated list of Java packages, that contain your entities -->
+									<!-- A comma separated list of Java packages, that contain your 
+										entities -->
 									<property>
 										<key>packages</key>
 										<value>com.daniele.mydatabase</value>
 									</property>
 								</properties>
 							</database>
+							<!--<target>
+								<packageName>com.daniele.mydatabase.jooq.db</packageName>
+								<directory>target/generated-sources/jooq</directory>
+							</target>-->
 						</generator>
 					</configuration>
 				</plugin>
