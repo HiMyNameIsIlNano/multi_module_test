@@ -7,6 +7,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.daniele.mydatabase.userProfile.model.Comment_;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails_;
 import org.jooq.DSLContext;
 import org.jooq.Record2;
 import org.jooq.Result;
