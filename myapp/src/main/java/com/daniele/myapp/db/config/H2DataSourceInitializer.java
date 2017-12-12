@@ -33,7 +33,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages="com.daniele.mydatabase", entityManagerFactoryRef="entityManagerFactory")
+@EnableJpaRepositories(basePackages="com.daniele.mybackend")
 public class H2DataSourceInitializer {
 
 	@Inject

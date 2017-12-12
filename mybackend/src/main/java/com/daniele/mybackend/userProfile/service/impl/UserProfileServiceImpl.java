@@ -23,7 +23,7 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	private UserProfileDao userProfileDao;
 	
 	@Inject
-	private UserProfileRepository userProfileRepository;	
+	private UserProfileRepository userProfileRepository;
 
 	@Inject
 	private CommentDao commentDao;
@@ -43,7 +43,8 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Override
 	@Transactional
 	public Optional<UserProfileDetails> getUserById(Long id) {
-		return userProfileRepository.findById(id);
+		UserProfileDetails profileDetails = userProfileRepository.findOne(id);
+		return profileDetails != null ? Optional.of(profileDetails) : Optional.empty();
 	}
 	
 	@Override
