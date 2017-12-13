@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -30,6 +31,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	private String surname;
 	
 	@Column(name = "EMAIL")
+	@Email(message = "Email should be valid")
 	private String email;
 
 	@Column(name = "NICKNAME")

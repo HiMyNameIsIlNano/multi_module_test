@@ -5,7 +5,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import org.jooq.Record2;
+import com.daniele.mybackend.userProfile.repository.CommentRepository;
+import com.daniele.mydatabase.userProfile.model.Comment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	
 	@Inject
 	private UserProfileRepository userProfileRepository;
+
+	@Inject
+	private CommentRepository commentRepository;
 
 	@Inject
 	private CommentDao commentDao;
@@ -50,19 +54,20 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Override
 	@Transactional
 	public UserProfileDetails getUserByName(String name) {
-		return userProfileDao.findByName(name);
+		return userProfileRepository.findByName(name);
 	}
 	
 	@Override
 	@Transactional 
 	public UserProfileDetails getUserByEmail(String email) {
-		return userProfileDao.findByEmail(email);
+		return userProfileRepository.findByEmail(email);
 	}
 	
 	@Override
 	@Transactional
-	public List<Record2<String,String>> getCommentsByUser(String name) {
-		return commentDao.findCommentsWithJooq(name);
+	public List<Comment> getCommentsByUser(String name) {
+        UserProfileDetails user = userProfileRepository.findByName(name);
+        return commentRepository.findByUser(user);
 	}
 
 	@Override
