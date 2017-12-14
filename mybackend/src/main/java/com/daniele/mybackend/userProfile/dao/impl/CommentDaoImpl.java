@@ -8,11 +8,11 @@ import com.daniele.mylogger.LogMethodExecution;
 import org.jooq.*;
 import org.jooq.generated.tables.UserComment;
 import org.jooq.generated.tables.UserProfile;
-import org.jooq.generated.tables.records.UserCommentRecord;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -26,50 +26,50 @@ public class CommentDaoImpl extends BaseEntityDaoImpl<Comment> implements Commen
     public List<Record> findByFilter(CommentFilter filter) {
         UserComment c = UserComment.USER_COMMENT.as("c");
         UserProfile p = UserProfile.USER_PROFILE.as("p");
-        boolean isFirst = true;
 
         SelectOnConditionStep<Record> select = create
                 .select()
                 .from(c)
                 .join(p).on(c.USER_ID_REF.eq(p.ID));
 
+        List<Condition> conditions = new ArrayList<>();
+
         if (filter.getUserName() != null) {
             Condition nameCondition = p.NAME.eq(filter.getUserName());
             select.where(nameCondition);
-            isFirst = false;
+            conditions.add(nameCondition);
         }
 
         if (filter.getValidFrom() != null) {
             Date dateFrom = Date.valueOf(filter.getValidFrom());
             Condition validFromCondition = c.VALID_FROM.greaterOrEqual(dateFrom);
-            if (isFirst) {
-                select.where(validFromCondition);
-                isFirst = false;
-            } else {
-                select.and(validFromCondition);
-            }
+            conditions.add(validFromCondition);
         }
 
         if (filter.getValidTo() != null) {
             Date dateTo = Date.valueOf(filter.getValidTo());
-            Condition validToCondition = c.VALID_FROM.eq(dateTo);
-            if (isFirst) {
-                select.where(validToCondition);
-                isFirst = false;
-            } else {
-                select.and(validToCondition);
-            }
+            Condition validToCondition = c.VALID_TO.lessOrEqual(dateTo);
+            conditions.add(validToCondition);
         }
 
         if (filter.isActive()){
             Condition validToCondition = c.IS_ACTIVE.eq(filter.isActive());
-            if (isFirst) {
-                select.where(validToCondition);
-            } else {
-                select.and(validToCondition);
-            }
+            conditions.add(validToCondition);
         }
 
+        CommentDaoImpl.buildConditions(select, conditions);
         return select.fetch();
+    }
+
+    private static void buildConditions(SelectOnConditionStep<Record> select, List<Condition> conditions) {
+        if (conditions.size() > 1) {
+            Condition condition = conditions.get(0);
+            select.where(condition);
+            for (Condition other : conditions.subList(1, conditions.size())) {
+                select.and(other);
+            }
+        } else if (conditions.size() == 1) {
+            select.where(conditions.get(0));
+        }
     }
 }

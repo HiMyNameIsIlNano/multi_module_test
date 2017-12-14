@@ -1,21 +1,18 @@
 package com.daniele.mybackend.userProfile.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.inject.Inject;
-
+import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
+import com.daniele.mybackend.userProfile.dao.CommentDao;
+import com.daniele.mybackend.userProfile.dao.UserProfileDao;
 import com.daniele.mybackend.userProfile.repository.CommentRepository;
-import com.daniele.mydatabase.userProfile.model.Comment;
+import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
+import com.daniele.mybackend.userProfile.service.UserProfileService;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
-import com.daniele.mybackend.userProfile.service.UserProfileService;
-import com.daniele.mybackend.userProfile.dao.CommentDao;
-import com.daniele.mybackend.userProfile.dao.UserProfileDao;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
+import javax.inject.Inject;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDetails> implements UserProfileService {
@@ -61,13 +58,6 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Transactional 
 	public UserProfileDetails getUserByEmail(String email) {
 		return userProfileRepository.findByEmail(email);
-	}
-	
-	@Override
-	@Transactional
-	public List<Comment> getCommentsByUser(String name) {
-        UserProfileDetails user = userProfileRepository.findByName(name);
-        return commentRepository.findByUser(user);
 	}
 
 	@Override
