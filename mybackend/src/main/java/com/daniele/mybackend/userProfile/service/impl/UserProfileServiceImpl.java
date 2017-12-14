@@ -23,12 +23,6 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Inject
 	private UserProfileRepository userProfileRepository;
 
-	@Inject
-	private CommentRepository commentRepository;
-
-	@Inject
-	private CommentDao commentDao;
-	
 	@Override
 	@Transactional
 	public List<UserProfileDetails> getAllUsers() {
