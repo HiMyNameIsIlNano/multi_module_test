@@ -1,12 +1,11 @@
 package com.daniele.mybackend.userProfile.service.impl;
 
-import com.daniele.mybackend.shared.service.impl.BaseEntityServiceImpl;
-import com.daniele.mybackend.userProfile.dao.CommentDao;
 import com.daniele.mybackend.userProfile.dao.UserProfileDao;
-import com.daniele.mybackend.userProfile.repository.CommentRepository;
+import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
 import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import org.jooq.generated.tables.records.UserProfileRecord;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDetails> implements UserProfileService {
+public class UserProfileServiceImpl implements UserProfileService {
 	
 	@Inject
 	private UserProfileDao userProfileDao;
@@ -23,16 +22,9 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 	@Inject
 	private UserProfileRepository userProfileRepository;
 
-	@Override
 	@Transactional
-	public List<UserProfileDetails> getAllUsers() {
-		return userProfileDao.findAll();
-	}
-	
-	@Override
-	@Transactional
-	public List<UserProfileDetails> getAllUsersSortedBySurnameAsc() {
-		return userProfileDao.findAllAndSortBySurnameAsc();
+	public List<UserProfileRecord> getByFilter(UserProfileDetailsFilter filter) {
+		return userProfileDao.findByFilter(filter);
 	}
 	
 	@Override
@@ -41,22 +33,17 @@ public class UserProfileServiceImpl extends BaseEntityServiceImpl<UserProfileDet
 		UserProfileDetails profileDetails = userProfileRepository.findOne(id);
 		return profileDetails != null ? Optional.of(profileDetails) : Optional.empty();
 	}
-	
-	@Override
-	@Transactional
-	public UserProfileDetails getUserByName(String name) {
-		return userProfileRepository.findByName(name);
-	}
-	
-	@Override
-	@Transactional 
-	public UserProfileDetails getUserByEmail(String email) {
-		return userProfileRepository.findByEmail(email);
-	}
 
 	@Override
 	@Transactional
-	public List<UserProfileDetails> findWithException() {
-		return userProfileDao.findWithException();
+	public Optional<UserProfileDetails> getUserByEmail(String email) {
+		UserProfileDetails result = userProfileRepository.findByEmail(email);
+		return result == null ? Optional.empty() : Optional.of(result);
 	}
+
+	@Override
+    @Transactional
+    public UserProfileDetails store(UserProfileDetails userProfileDetails) {
+        return userProfileRepository.save(userProfileDetails);
+    }
 }

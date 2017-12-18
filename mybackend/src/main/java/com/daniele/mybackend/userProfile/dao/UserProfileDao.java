@@ -1,14 +1,12 @@
 package com.daniele.mybackend.userProfile.dao;
 
+import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import org.jooq.generated.tables.records.UserProfileRecord;
+
 import java.util.List;
 
-import com.daniele.mybackend.shared.dao.BaseEntityDao;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-
-public interface UserProfileDao extends BaseEntityDao<UserProfileDetails> {
-	UserProfileDetails findByName(String name);
-	List<UserProfileDetails> findAllAndSortBySurnameAsc();
-	UserProfileDetails findByEmail(String email);
-	List<UserProfileDetails> findByNameLike(String name);
+public interface UserProfileDao {
+	List<UserProfileRecord> findByFilter(UserProfileDetailsFilter filter);
 	List<UserProfileDetails> findWithException();
 }

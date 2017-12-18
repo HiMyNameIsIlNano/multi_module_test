@@ -1,9 +1,14 @@
 package com.daniele.mybackend.userProfile.dto;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
+import com.daniele.mydatabase.DateUtils;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails.UserProfileBuilder;
+import org.jooq.generated.tables.UserComment;
+import org.jooq.generated.tables.UserProfile;
+import org.jooq.generated.tables.records.UserProfileRecord;
 
 public class UserProfileDto {
 
@@ -124,6 +129,31 @@ public class UserProfileDto {
 		userProfileDto.setValidFrom(userProfile.getValidTo());
 		
 		return userProfileDto;
+	}
+
+	public static UserProfileDto ofUserProfileRecord(UserProfileRecord userProfile) {
+        UserProfileDto userProfileDto = new UserProfileDto();
+
+        userProfileDto.setId(userProfile.get(UserProfile.USER_PROFILE.ID));
+        userProfileDto.setImgPath(userProfile.get(UserProfile.USER_PROFILE.IMG_PATH));
+        userProfileDto.setName(userProfile.get(UserProfile.USER_PROFILE.NAME));
+        userProfileDto.setSurname(userProfile.get(UserProfile.USER_PROFILE.SURNAME));
+        userProfileDto.setNickname(userProfile.get(UserProfile.USER_PROFILE.NICKNAME));
+        userProfileDto.setEmail(userProfile.get(UserProfile.USER_PROFILE.EMAIL));
+        userProfileDto.setUpdatedBy(userProfile.get(UserProfile.USER_PROFILE.UPDATED_BY));
+
+        Date validFrom = userProfile.get(UserProfile.USER_PROFILE.VALID_FROM);
+        userProfileDto.setValidFrom(DateUtils.fromLocalDate(validFrom));
+
+        Date validTo = userProfile.get(UserProfile.USER_PROFILE.VALID_TO);
+        userProfileDto.setValidTo(DateUtils.fromLocalDate(validTo));
+
+        Date lastUpdate = userProfile.get(UserProfile.USER_PROFILE.LAST_UPDATE);
+        userProfileDto.setLastUpdate(lastUpdate != null ?
+                DateUtils.fromLocalDate(lastUpdate) :
+                null);
+
+        return userProfileDto;
 	}
 	
 	public static UserProfileDetails fromDto(UserProfileDto userProfileDto) {

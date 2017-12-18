@@ -2,9 +2,11 @@ package com.daniele.mybackend.userProfile.controller;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
+import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,8 +52,10 @@ public class AuthRestController {
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
-            token = tokenUtils.generateToken(userProfile);
+            Optional<UserProfileDetails> userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+            if (userProfile.isPresent()) {
+				token = tokenUtils.generateToken(userProfile.get());
+			}
         }
         Map<String, String> authResponse = Collections.singletonMap("token", token);
 		return ResponseEntity.ok(authResponse);
@@ -61,9 +65,15 @@ public class AuthRestController {
 	@PostMapping(path = "/validate-token")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Map<String, Boolean>> validateToken(@RequestBody AuthDto authDto) throws AuthenticationException {
-        UserProfileDetails userProfile = userProfileService.getUserByEmail(authDto.getEmail());
-        Boolean isValid = tokenUtils.validateToken(authDto.getToken(), userProfile);
-		Map<String, Boolean> response = Collections.singletonMap("valid", isValid);
+        Optional<UserProfileDetails> userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+        Boolean isValid = false;
+		Map<String, Boolean> response;
+
+		if (userProfile.isPresent()) {
+			isValid = tokenUtils.validateToken(authDto.getToken(), userProfile.get());
+		}
+
+		response = Collections.singletonMap("valid", isValid);
 		return ResponseEntity.ok(response);
 	}
 	

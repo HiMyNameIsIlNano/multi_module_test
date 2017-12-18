@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class CommentFilter {
 
-    LocalDate validFrom;
-    LocalDate validTo;
-    boolean active;
-    String userName;
+    private LocalDate validFrom;
+    private LocalDate validTo;
+    private boolean active;
+    private String userName;
 
     public CommentFilter(LocalDate validFrom, LocalDate validTo, boolean active, String userName) {
         this.validFrom = validFrom;

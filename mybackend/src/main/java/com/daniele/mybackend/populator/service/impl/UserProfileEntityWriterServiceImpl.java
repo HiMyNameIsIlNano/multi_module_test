@@ -2,6 +2,7 @@ package com.daniele.mybackend.populator.service.impl;
 
 import com.daniele.mybackend.populator.service.UserProfileEntityWriterService;
 import com.daniele.mybackend.populator.model.UserProfileWriterData;
+import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import com.daniele.mybackend.userProfile.service.CommentService;
 import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.Comment;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.Optional;
 
 @Service
 public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWriterService {
@@ -45,7 +47,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
                     .build();
 
             System.out.println("Saving profile for " + userProfile);
-            userProfileService.save(userProfile);
+            userProfileService.store(userProfile);
         }
 
         String textShort = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
@@ -64,32 +66,37 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
         		+ "Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.";
         
         for (int i = 0; i < userNumber; i++) {
-            UserProfileDetails fromDb = userProfileService.getUserByEmail("user_" + i + "@email.com");
+            Optional<UserProfileDetails> fromDb = userProfileService.getUserByEmail("user_" + i + "@email.com");
 
-            commentShort = Comment.CommentBuilder.forCreation()
-                    .withText(textShort)
-                    .withTopic("Geography")
-                    .withUser(fromDb)
-                    .build();
+            if (!fromDb.isPresent()) {
+                continue;
+            } else {
+                commentShort = Comment.CommentBuilder.forCreation()
+                        .withText(textShort)
+                        .withTopic("Geography")
+                        .withUser(fromDb.get())
+                        .build();
 
-            System.out.println("Saving comment for " + fromDb);
-            commentService.save(commentShort);
+                System.out.println("Saving comment for " + fromDb);
+                commentService.store(commentShort);
 
-            commentMedium = Comment.CommentBuilder.forCreation()
-                    .withText(textMedium)
-                    .withTopic("Science")
-                    .withUser(fromDb)
-                    .build();
-            System.out.println("Saving comment for " + fromDb);
-            commentService.save(commentMedium);
+                commentMedium = Comment.CommentBuilder.forCreation()
+                        .withText(textMedium)
+                        .withTopic("Science")
+                        .withUser(fromDb.get())
+                        .build();
+                System.out.println("Saving comment for " + fromDb);
+                commentService.store(commentMedium);
 
-            commentLong = Comment.CommentBuilder.forCreation()
-                    .withText(textLong)
-                    .withTopic("History")
-                    .withUser(fromDb)
-                    .build();
-            System.out.println("Saving comment for " + fromDb);
-            commentService.save(commentLong);
+                commentLong = Comment.CommentBuilder.forCreation()
+                        .withText(textLong)
+                        .withTopic("History")
+                        .withUser(fromDb.get())
+                        .build();
+                System.out.println("Saving comment for " + fromDb);
+                commentService.store(commentLong);
+
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.daniele.mybackend.userProfile.dao.impl;
 
+import com.daniele.mybackend.shared.JooqUtils;
 import com.daniele.mybackend.shared.dao.impl.BaseEntityDaoImpl;
 import com.daniele.mybackend.userProfile.dao.CommentDao;
 import com.daniele.mybackend.userProfile.model.CommentFilter;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CommentDaoImpl extends BaseEntityDaoImpl<Comment> implements CommentDao {
+public class CommentDaoImpl implements CommentDao {
 
 	@Inject
 	private DSLContext create;
@@ -36,7 +37,6 @@ public class CommentDaoImpl extends BaseEntityDaoImpl<Comment> implements Commen
 
         if (filter.getUserName() != null) {
             Condition nameCondition = p.NAME.eq(filter.getUserName());
-            select.where(nameCondition);
             conditions.add(nameCondition);
         }
 
@@ -57,19 +57,8 @@ public class CommentDaoImpl extends BaseEntityDaoImpl<Comment> implements Commen
             conditions.add(validToCondition);
         }
 
-        CommentDaoImpl.buildConditions(select, conditions);
+        JooqUtils.buildConditions(select, conditions);
         return select.fetch();
     }
 
-    private static void buildConditions(SelectOnConditionStep<Record> select, List<Condition> conditions) {
-        if (conditions.size() > 1) {
-            Condition condition = conditions.get(0);
-            select.where(condition);
-            for (Condition other : conditions.subList(1, conditions.size())) {
-                select.and(other);
-            }
-        } else if (conditions.size() == 1) {
-            select.where(conditions.get(0));
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package com.daniele.mydatabase.shared.model;
 
+import com.daniele.mydatabase.DateUtils;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -41,7 +43,7 @@ public abstract class BaseEntity implements Serializable {
 	
 	@PreUpdate
 	public void setLastUpdateAndUpdatedBy() {
-		this.lastUpdate = LocalDate.now();
+		this.lastUpdate = DateUtils.now();
 		this.updatedBy = "Dummy";
 	}
 

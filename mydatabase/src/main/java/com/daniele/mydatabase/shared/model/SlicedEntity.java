@@ -36,7 +36,7 @@ public abstract class SlicedEntity extends BaseEntity {
 	@PreUpdate
 	@PrePersist
 	public void setValidFromAndValidTo() {
-		this.validFrom = LocalDate.now();
+		this.validFrom = DateUtils.now();
 		this.validTo = DateUtils.END_OF_DATE_TIME;
 		this.updatedBy = "Dummy";
 	}

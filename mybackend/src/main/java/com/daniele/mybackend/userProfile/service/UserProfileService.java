@@ -1,16 +1,15 @@
 package com.daniele.mybackend.userProfile.service;
 
-import com.daniele.mybackend.shared.service.BaseEntityService;
+import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import org.jooq.generated.tables.records.UserProfileRecord;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserProfileService extends BaseEntityService<UserProfileDetails> {
-	List<UserProfileDetails> getAllUsers();
-	List<UserProfileDetails> getAllUsersSortedBySurnameAsc();
+public interface UserProfileService {
+	List<UserProfileRecord> getByFilter(UserProfileDetailsFilter filter);
 	Optional<UserProfileDetails> getUserById(Long id);
-	UserProfileDetails getUserByName(String name);
-	UserProfileDetails getUserByEmail(String email);
-	List<UserProfileDetails> findWithException();
+	Optional<UserProfileDetails> getUserByEmail(String email);
+	UserProfileDetails store(UserProfileDetails userProfileDetails);
 }
