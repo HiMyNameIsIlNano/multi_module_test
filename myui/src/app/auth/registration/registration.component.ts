@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserProfile } from '../../user-profile/user-profile.model';
+import {Address} from "../../user-profile/address.model";
 
 @Component({
   selector: 'app-registration',
@@ -19,6 +20,7 @@ export class RegistrationComponent implements OnInit {
               , form.value.name
               , form.value.surname
               , form.value.nickname
+              , new Address(form.value.streetName, form.value.streetNumber, form.value.city)
               , form.value.email
               , form.value.password);
 

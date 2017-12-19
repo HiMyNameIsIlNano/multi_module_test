@@ -2,10 +2,7 @@ package com.daniele.mydatabase.userProfile.model;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +26,10 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	
 	@Column(name = "SURNAME")
 	private String surname;
+
+	@Column(name = "ADDRESS")
+	@Embedded
+	private Address address;
 	
 	@Column(name = "EMAIL")
 	@Email(message = "Email should be valid")
@@ -51,6 +52,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.name = builder.userProfile.name;
 		this.imgPath = builder.userProfile.imgPath;
 		this.surname = builder.userProfile.surname;
+		this.address = builder.userProfile.address;
 		this.email = builder.userProfile.email;
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
@@ -69,7 +71,11 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		return surname;
 	}
 
-	public String getEmail() {
+    public Address getAddress() {
+        return address;
+    }
+
+    public String getEmail() {
 		return email;
 	}
 
@@ -160,6 +166,11 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 			this.userProfile.surname = surname;
 			return this;
 		}
+
+        public UserProfileBuilder withAddress(Address address) {
+            this.userProfile.address = address;
+            return this;
+        }
 
 		public UserProfileBuilder withEmail(String email) {
 			this.userProfile.email = email;

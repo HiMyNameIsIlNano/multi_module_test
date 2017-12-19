@@ -25,7 +25,8 @@ public class WebMvcInitializer extends WebMvcConfigurerAdapter {
 	
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:4200");	
+        registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+        //registry.addMapping("/mybackend/**").allowedOrigins("http://localhost:4200");
     }
 
 	@Bean

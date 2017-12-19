@@ -5,6 +5,7 @@ import com.daniele.mybackend.populator.model.UserProfileWriterData;
 import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import com.daniele.mybackend.userProfile.service.CommentService;
 import com.daniele.mybackend.userProfile.service.UserProfileService;
+import com.daniele.mydatabase.userProfile.model.Address;
 import com.daniele.mydatabase.userProfile.model.Comment;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
 import com.daniele.mydatabase.userProfile.model.UserRole;
@@ -35,6 +36,12 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
         int userNumber = data.getUserNumber();
 
         for (int i = 0; i < userNumber; i++) {
+            Address address = Address.AddressBuilder.forCreation()
+                    .withCity("City_" + i)
+                    .withStreetName("Street_" + i)
+                    .withStreetNumber(i)
+                    .build();
+
             UserProfileDetails userProfile = UserProfileDetails.UserProfileBuilder.forCreation()
                     .withImgPath("http://vignette4.wikia.nocookie.net/scribblenauts/images/4/42/Crash_Test_Dummy.png/revision/latest?cb=20130309213400")
             		.withName("User_" + i)
@@ -43,6 +50,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
                     .withEmail("user_" + i + "@email.com")
                     .withPassword(passwordEncoder.encode("pwd_" + i))
                     //.withPassword("$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC") // password
+                    .withAddress(address)
                     .withUserRole(UserRole.USER)
                     .build();
 

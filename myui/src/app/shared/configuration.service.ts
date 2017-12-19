@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 export class ConfigurationService {
 
     private serverUrl = 'http://localhost:9090';
-    private appName = '/';
-    private apiUrl = 'mybackend';
+    private appName = '';
+    private apiUrl = '';
     private restApiUrl = this.serverUrl + this.appName + this.apiUrl;
     private contentHeaders = new Headers();
 

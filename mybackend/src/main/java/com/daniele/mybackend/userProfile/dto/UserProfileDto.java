@@ -12,17 +12,17 @@ import org.jooq.generated.tables.records.UserProfileRecord;
 
 public class UserProfileDto {
 
-	Long id;
-	String imgPath;
-	String name;
-	String surname;
-	String email;
-	String nickname;
-	String password;
-	LocalDate lastUpdate;
-	String updatedBy;
-	LocalDate validFrom;
-	LocalDate validTo;
+	private Long id;
+	private String imgPath;
+	private String name;
+	private String surname;
+	private AddressDto address;
+	private String email;
+	private String nickname;
+	private LocalDate lastUpdate;
+	private String updatedBy;
+	private LocalDate validFrom;
+	private LocalDate validTo;
 	
 	public UserProfileDto() {
 	}
@@ -59,6 +59,14 @@ public class UserProfileDto {
 		this.surname = surname;
 	}
 
+	public AddressDto getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddressDto address) {
+		this.address = address;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -75,14 +83,6 @@ public class UserProfileDto {
 		this.nickname = nickname;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	public LocalDate getLastUpdate() {
 		return lastUpdate;
 	}
@@ -117,6 +117,11 @@ public class UserProfileDto {
 
 	public static UserProfileDto ofUserProfile(UserProfileDetails userProfile) {
 		UserProfileDto userProfileDto = new UserProfileDto();
+		AddressDto addressDto = new AddressDto(
+				userProfile.getAddress().getStreetName(),
+				userProfile.getAddress().getStreetNumber(),
+				userProfile.getAddress().getCity());
+
 		userProfileDto.setId(userProfile.getId());
 		userProfileDto.setImgPath(userProfile.getImgPath());
 		userProfileDto.setName(userProfile.getName());
@@ -127,12 +132,18 @@ public class UserProfileDto {
 		userProfileDto.setUpdatedBy(userProfile.getUpdatedBy());
 		userProfileDto.setValidFrom(userProfile.getValidFrom());
 		userProfileDto.setValidFrom(userProfile.getValidTo());
-		
+
+		userProfileDto.setAddress(addressDto);
+
 		return userProfileDto;
 	}
 
 	public static UserProfileDto ofUserProfileRecord(UserProfileRecord userProfile) {
         UserProfileDto userProfileDto = new UserProfileDto();
+		AddressDto addressDto = new AddressDto(
+				userProfile.get(UserProfile.USER_PROFILE.STREET_NAME),
+				userProfile.get(UserProfile.USER_PROFILE.STREET_NUMBER),
+				userProfile.get(UserProfile.USER_PROFILE.CITY));
 
         userProfileDto.setId(userProfile.get(UserProfile.USER_PROFILE.ID));
         userProfileDto.setImgPath(userProfile.get(UserProfile.USER_PROFILE.IMG_PATH));
@@ -140,7 +151,9 @@ public class UserProfileDto {
         userProfileDto.setSurname(userProfile.get(UserProfile.USER_PROFILE.SURNAME));
         userProfileDto.setNickname(userProfile.get(UserProfile.USER_PROFILE.NICKNAME));
         userProfileDto.setEmail(userProfile.get(UserProfile.USER_PROFILE.EMAIL));
-        userProfileDto.setUpdatedBy(userProfile.get(UserProfile.USER_PROFILE.UPDATED_BY));
+		userProfileDto.setUpdatedBy(userProfile.get(UserProfile.USER_PROFILE.UPDATED_BY));
+
+		userProfileDto.setAddress(addressDto);
 
         Date validFrom = userProfile.get(UserProfile.USER_PROFILE.VALID_FROM);
         userProfileDto.setValidFrom(DateUtils.fromLocalDate(validFrom));
@@ -154,28 +167,5 @@ public class UserProfileDto {
                 null);
 
         return userProfileDto;
-	}
-	
-	public static UserProfileDetails fromDto(UserProfileDto userProfileDto) {
-		UserProfileDetails userProfile = UserProfileBuilder.forCreation()
-				.withName(userProfileDto.getName())
-				.withImgPath(userProfileDto.getImgPath())
-				.withSurname(userProfileDto.getSurname())
-				.withNickname(userProfileDto.getNickname())
-				.withEmail(userProfileDto.getEmail())
-				.withPassword(userProfileDto.getPassword())
-				.build();
-		return userProfile;
-	}
-	
-	public static UserProfileDetails mergeEntityToDto(UserProfileDetails oldUserProfile, UserProfileDto userProfileDto) {
-		UserProfileDetails updatedUserProfile = UserProfileBuilder.forUpdate(oldUserProfile)
-				.withName(userProfileDto.getName())
-				.withSurname(userProfileDto.getSurname())
-				.withNickname(userProfileDto.getNickname())
-				.withEmail(userProfileDto.getEmail())
-				.withPassword(userProfileDto.getPassword())
-				.build();
-		return updatedUserProfile;
 	}
 }
