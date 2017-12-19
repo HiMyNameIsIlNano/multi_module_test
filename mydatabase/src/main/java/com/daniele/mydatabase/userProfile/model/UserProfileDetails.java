@@ -1,15 +1,13 @@
 package com.daniele.mydatabase.userProfile.model;
 
-import java.util.Collection;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-
+import com.daniele.mydatabase.shared.model.SlicedEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.daniele.mydatabase.shared.model.SlicedEntity;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.Collection;
 
 @Entity
 @Table(name = "USER_PROFILE")
@@ -43,6 +41,10 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	
 	@Column(name = "ROLE")
 	private UserRole userRole;
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="SOCIAL_ID_REF")
+	private SocialProfileDetails socialProfileDetails;
 		
 	public UserProfileDetails() {
 	}
@@ -57,6 +59,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.nickname = builder.userProfile.nickname;
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
+		this.socialProfileDetails = builder.userProfile.socialProfileDetails;
 	}
 
 	public String getImgPath() {
@@ -90,7 +93,11 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	public UserRole getUserRole() {
 		return userRole;
 	}
-	
+
+	public SocialProfileDetails getSocialProfileDetails() {
+		return socialProfileDetails;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return AuthorityUtils.commaSeparatedStringToAuthorityList(getUserRole().getAuthority());
@@ -189,6 +196,11 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		
 		public UserProfileBuilder withUserRole(UserRole userRole) {
 			this.userProfile.userRole = userRole;
+			return this;
+		}
+
+		public UserProfileBuilder withSocialProfile(SocialProfileDetails profileDetails) {
+			this.userProfile.socialProfileDetails = profileDetails;
 			return this;
 		}
 		

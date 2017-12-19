@@ -9,13 +9,11 @@ import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.DateUtils;
 import com.daniele.mydatabase.shared.model.SortType;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mydatabase.userProfile.model.UserRole;
-import org.jooq.generated.tables.records.UserProfileRecord;
+import org.jooq.Record;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,9 +48,9 @@ public class UserProfileRestController {
 	    filter.setSort(SortType.ASCENDING);
 	    //filter.setUserRole(UserRole.USER);
 
-		List<UserProfileRecord> userProfiles = userProfileService.getByFilter(filter);
+		List<Record> userProfiles = userProfileService.getByFilter(filter);
 		return userProfiles.stream()
-				.map(UserProfileDto::ofUserProfileRecord)
+				.map(UserProfileDto::ofRecord)
 				.collect(Collectors.toList());
 	}
 

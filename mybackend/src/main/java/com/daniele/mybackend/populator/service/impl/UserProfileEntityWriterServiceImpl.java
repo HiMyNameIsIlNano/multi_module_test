@@ -5,10 +5,7 @@ import com.daniele.mybackend.populator.model.UserProfileWriterData;
 import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import com.daniele.mybackend.userProfile.service.CommentService;
 import com.daniele.mybackend.userProfile.service.UserProfileService;
-import com.daniele.mydatabase.userProfile.model.Address;
-import com.daniele.mydatabase.userProfile.model.Comment;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mydatabase.userProfile.model.UserRole;
+import com.daniele.mydatabase.userProfile.model.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +39,11 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
                     .withStreetNumber(i)
                     .build();
 
+            SocialProfileDetails profileDetails = SocialProfileDetails.SocialProfileDetailsBuilder.forCreation()
+                    .withProfileName("MySocialAccount" + i)
+                    .withProfileUrl("www.mysocialaccount" + i + ".nogo")
+                    .build();
+
             UserProfileDetails userProfile = UserProfileDetails.UserProfileBuilder.forCreation()
                     .withImgPath("http://vignette4.wikia.nocookie.net/scribblenauts/images/4/42/Crash_Test_Dummy.png/revision/latest?cb=20130309213400")
             		.withName("User_" + i)
@@ -52,6 +54,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
                     //.withPassword("$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC") // password
                     .withAddress(address)
                     .withUserRole(UserRole.USER)
+                    .withSocialProfile(profileDetails)
                     .build();
 
             System.out.println("Saving profile for " + userProfile);

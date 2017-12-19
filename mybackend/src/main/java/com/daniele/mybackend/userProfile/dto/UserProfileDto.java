@@ -5,10 +5,9 @@ import java.time.LocalDate;
 
 import com.daniele.mydatabase.DateUtils;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails.UserProfileBuilder;
-import org.jooq.generated.tables.UserComment;
+import org.jooq.Record;
+import org.jooq.generated.tables.SocialProfile;
 import org.jooq.generated.tables.UserProfile;
-import org.jooq.generated.tables.records.UserProfileRecord;
 
 public class UserProfileDto {
 
@@ -23,6 +22,7 @@ public class UserProfileDto {
 	private String updatedBy;
 	private LocalDate validFrom;
 	private LocalDate validTo;
+	private SocialProfileDto socialProfile;
 	
 	public UserProfileDto() {
 	}
@@ -115,12 +115,25 @@ public class UserProfileDto {
 		this.validTo = validTo;
 	}
 
-	public static UserProfileDto ofUserProfile(UserProfileDetails userProfile) {
+    public SocialProfileDto getSocialProfile() {
+        return socialProfile;
+    }
+
+    public void setSocialProfile(SocialProfileDto socialProfile) {
+        this.socialProfile = socialProfile;
+    }
+
+    public static UserProfileDto ofUserProfile(UserProfileDetails userProfile) {
 		UserProfileDto userProfileDto = new UserProfileDto();
 		AddressDto addressDto = new AddressDto(
 				userProfile.getAddress().getStreetName(),
 				userProfile.getAddress().getStreetNumber(),
 				userProfile.getAddress().getCity());
+
+        SocialProfileDto socialProfileDto = new SocialProfileDto(
+                userProfile.getSocialProfileDetails().getProfileName(),
+                userProfile.getSocialProfileDetails().getProfileUrl()
+        );
 
 		userProfileDto.setId(userProfile.getId());
 		userProfileDto.setImgPath(userProfile.getImgPath());
@@ -134,16 +147,22 @@ public class UserProfileDto {
 		userProfileDto.setValidFrom(userProfile.getValidTo());
 
 		userProfileDto.setAddress(addressDto);
+        userProfileDto.setSocialProfile(socialProfileDto);
 
 		return userProfileDto;
 	}
 
-	public static UserProfileDto ofUserProfileRecord(UserProfileRecord userProfile) {
+	public static UserProfileDto ofRecord(Record userProfile) {
         UserProfileDto userProfileDto = new UserProfileDto();
 		AddressDto addressDto = new AddressDto(
 				userProfile.get(UserProfile.USER_PROFILE.STREET_NAME),
 				userProfile.get(UserProfile.USER_PROFILE.STREET_NUMBER),
 				userProfile.get(UserProfile.USER_PROFILE.CITY));
+
+        SocialProfileDto socialProfileDto = new SocialProfileDto(
+                userProfile.get(SocialProfile.SOCIAL_PROFILE.PROFILE_NAME),
+                userProfile.get(SocialProfile.SOCIAL_PROFILE.PROFILE_URL)
+        );
 
         userProfileDto.setId(userProfile.get(UserProfile.USER_PROFILE.ID));
         userProfileDto.setImgPath(userProfile.get(UserProfile.USER_PROFILE.IMG_PATH));
@@ -154,6 +173,7 @@ public class UserProfileDto {
 		userProfileDto.setUpdatedBy(userProfile.get(UserProfile.USER_PROFILE.UPDATED_BY));
 
 		userProfileDto.setAddress(addressDto);
+		userProfileDto.setSocialProfile(socialProfileDto);
 
         Date validFrom = userProfile.get(UserProfile.USER_PROFILE.VALID_FROM);
         userProfileDto.setValidFrom(DateUtils.fromLocalDate(validFrom));

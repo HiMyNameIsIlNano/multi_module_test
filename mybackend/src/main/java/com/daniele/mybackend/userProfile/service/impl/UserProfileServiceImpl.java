@@ -5,7 +5,7 @@ import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
 import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import com.daniele.mybackend.userProfile.service.UserProfileService;
 import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import org.jooq.generated.tables.records.UserProfileRecord;
+import org.jooq.Record;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 	private UserProfileRepository userProfileRepository;
 
 	@Transactional
-	public List<UserProfileRecord> getByFilter(UserProfileDetailsFilter filter) {
+	public List<Record> getByFilter(UserProfileDetailsFilter filter) {
 		return userProfileDao.findByFilter(filter);
 	}
 	

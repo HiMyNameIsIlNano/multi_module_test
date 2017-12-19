@@ -1,4 +1,5 @@
 import {Address} from "./address.model";
+import {SocialProfile} from "./social-profile.model";
 
 export class UserProfile {
 
@@ -8,6 +9,7 @@ export class UserProfile {
             , public nickname: string
             , public address: Address
             , public email: string
-            , public password: string) {}
+            , public password: string
+            , public socialProfile: SocialProfile) {}
 
 }

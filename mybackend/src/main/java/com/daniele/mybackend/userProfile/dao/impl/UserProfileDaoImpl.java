@@ -1,24 +1,25 @@
 package com.daniele.mybackend.userProfile.dao.impl;
 
+import com.daniele.mybackend.shared.JooqUtils;
+import com.daniele.mybackend.userProfile.dao.UserProfileDao;
+import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
+import com.daniele.mydatabase.shared.model.SortType;
+import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
+import com.daniele.mydatabase.userProfile.model.UserRole;
+import com.daniele.mylogger.LogExecutionTime;
+import com.daniele.mylogger.LogMethodException;
+import org.jooq.Condition;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.SelectOnConditionStep;
+import org.jooq.generated.tables.SocialProfile;
+import org.jooq.generated.tables.UserProfile;
+import org.springframework.stereotype.Repository;
+
+import javax.inject.Inject;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
-
-import com.daniele.mybackend.shared.JooqUtils;
-import com.daniele.mybackend.userProfile.model.UserProfileDetailsFilter;
-import com.daniele.mydatabase.shared.model.SortType;
-import com.daniele.mydatabase.userProfile.model.UserRole;
-import com.daniele.mylogger.LogMethodException;
-import org.jooq.*;
-import org.jooq.generated.tables.UserProfile;
-import org.jooq.generated.tables.records.UserProfileRecord;
-import org.springframework.stereotype.Repository;
-
-import com.daniele.mybackend.userProfile.dao.UserProfileDao;
-import com.daniele.mydatabase.userProfile.model.UserProfileDetails;
-import com.daniele.mylogger.LogExecutionTime;
 
 @Repository
 public class UserProfileDaoImpl implements UserProfileDao {
@@ -28,10 +29,14 @@ public class UserProfileDaoImpl implements UserProfileDao {
 
 	@Override
 	@LogExecutionTime
-	public List<UserProfileRecord> findByFilter(UserProfileDetailsFilter filter) {
+	public List<Record> findByFilter(UserProfileDetailsFilter filter) {
         UserProfile p = UserProfile.USER_PROFILE.as("p");
+        SocialProfile s = SocialProfile.SOCIAL_PROFILE.as("s");
 
-        SelectWhereStep<UserProfileRecord> select = create.selectFrom(p);
+        SelectOnConditionStep<Record> select = create
+                .select()
+                .from(p)
+                .join(s).on(p.SOCIAL_ID_REF.eq(s.ID));
 
         List<Condition> conditions = new ArrayList<>();
 
