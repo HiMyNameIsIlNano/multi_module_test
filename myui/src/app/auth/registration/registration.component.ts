@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserProfile } from '../../user-profile/user-profile.model';
 import {Address} from "../../user-profile/address.model";
+import {SocialProfile} from "../../user-profile/social-profile.model";
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +23,8 @@ export class RegistrationComponent implements OnInit {
               , form.value.nickname
               , new Address(form.value.streetName, form.value.streetNumber, form.value.city)
               , form.value.email
-              , form.value.password);
+              , form.value.password
+              , new SocialProfile(form.value.socialAccountName, form.value.socialAccountUrl));
 
       this.authService.onRegistration(userProfile)
           .subscribe((response) => {
