@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface UserProfileService {
 	List<Record> getByFilter(UserProfileDetailsFilter filter);
+	List<Record> getFriendsByUser(String name);
 	List<UserProfileDetails> getAllValidUsers();
 	Optional<UserProfileDetails> getUserById(Long id);
 	Optional<UserProfileDetails> getUserByEmail(String email);

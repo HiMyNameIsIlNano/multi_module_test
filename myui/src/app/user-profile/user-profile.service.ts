@@ -43,6 +43,19 @@ export class UserProfileService {
             });
     }
 
+    getFriendsForCurrentUser(name: string): Observable<UserProfile[]> {
+        return this.http.get( `${this.restUrl}/friends/${name}` )
+            .map(
+            (response: Response) => {
+                const data = response.json();
+                return data;
+            })
+            .catch(
+            ( error: Response ) => {
+                return Observable.throw( 'Error: getUserProfileList: something went wrong with your request' );
+            });
+    }
+
     getUserCommentList(name: string): Observable<UserProfileBlogEntry[]> {
         return this.http.get( `${this.restUrl}/comments/${name}` )
             .map(

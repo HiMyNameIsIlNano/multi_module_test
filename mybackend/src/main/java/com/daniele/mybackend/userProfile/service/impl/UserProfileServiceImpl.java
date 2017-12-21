@@ -37,7 +37,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 		all.forEach(list::add);
 		return list;
 	}
-	
+
+	@Override
+	@Transactional
+	public List<Record> getFriendsByUser(String user) {
+		return userProfileDao.findFriendsByUser(user);
+	}
+
 	@Override
 	@Transactional
 	public Optional<UserProfileDetails> getUserById(Long id) {

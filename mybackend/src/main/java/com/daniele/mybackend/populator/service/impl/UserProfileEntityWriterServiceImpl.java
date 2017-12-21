@@ -120,6 +120,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
     }
 
     private HashSet<UserProfileDetails> getRandomFriends(List<UserProfileDetails> allValidUsers, int iMin, int iMax) {
+        // TODO: this can be out of bounds
         int randomIndex = new Random().nextInt((iMax - iMin) + 1) + iMin + 1;
         return new HashSet<>(allValidUsers.subList(randomIndex, iMax));
     }

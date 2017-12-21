@@ -54,6 +54,15 @@ public class UserProfileRestController {
 				.collect(Collectors.toList());
 	}
 
+	@GetMapping(path = "/friends")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<UserProfileDto> getFriends(@PathVariable("name") String user) {
+		List<Record> userProfiles = userProfileService.getFriendsByUser(user);
+		return userProfiles.stream()
+				.map(UserProfileDto::ofRecord)
+				.collect(Collectors.toList());
+	}
+
 	// https://blog.georgovassilis.com/2015/10/29/spring-mvc-rest-controller-says-406-when-emails-are-part-url-path/
 	// http://www.baeldung.com/spring-mvc-content-negotiation-json-xml
     @GetMapping(path = "/comments/{name}", produces = "application/json")

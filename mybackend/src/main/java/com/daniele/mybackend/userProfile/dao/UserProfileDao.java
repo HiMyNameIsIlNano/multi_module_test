@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface UserProfileDao {
 	List<Record> findByFilter(UserProfileDetailsFilter filter);
+	List<Record> findFriendsByUser(String user);
 	List<UserProfileDetails> findWithException();
 }
