@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +23,19 @@ public class UserProfileServiceImpl implements UserProfileService {
 	@Inject
 	private UserProfileRepository userProfileRepository;
 
+	@Override
 	@Transactional
 	public List<Record> getByFilter(UserProfileDetailsFilter filter) {
 		return userProfileDao.findByFilter(filter);
+	}
+
+	@Override
+	@Transactional
+	public List<UserProfileDetails> getAllValidUsers() {
+		Iterable<UserProfileDetails> all = userProfileRepository.findAll();
+		List<UserProfileDetails> list = new ArrayList<>();
+		all.forEach(list::add);
+		return list;
 	}
 	
 	@Override

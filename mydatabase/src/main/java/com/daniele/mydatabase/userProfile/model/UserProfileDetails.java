@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USER_PROFILE")
@@ -45,7 +47,16 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="SOCIAL_ID_REF")
 	private SocialProfileDetails socialProfileDetails;
-		
+
+	@ManyToMany(cascade={CascadeType.ALL})
+	@JoinTable(name="USER_TO_FRIEND",
+			joinColumns={@JoinColumn(name="USER_ID")},
+			inverseJoinColumns={@JoinColumn(name="FRIEND_ID")})
+	private Set<UserProfileDetails> friends = new HashSet<>();
+
+	/*@ManyToMany(mappedBy="friends")
+	private Set<UserProfileDetails> teammates = new HashSet<>();
+    */
 	public UserProfileDetails() {
 	}
 	
@@ -60,6 +71,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 		this.password = builder.userProfile.password;
 		this.userRole = builder.userProfile.userRole;
 		this.socialProfileDetails = builder.userProfile.socialProfileDetails;
+		this.friends = builder.userProfile.friends;
 	}
 
 	public String getImgPath() {
@@ -92,6 +104,10 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 	
 	public UserRole getUserRole() {
 		return userRole;
+	}
+
+	public Set<UserProfileDetails> getFriends() {
+		return friends;
 	}
 
 	public SocialProfileDetails getSocialProfileDetails() {
@@ -203,7 +219,12 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 			this.userProfile.socialProfileDetails = profileDetails;
 			return this;
 		}
-		
+
+		public UserProfileBuilder withFriends(Set<UserProfileDetails> friends) {
+			this.userProfile.friends = friends;
+			return this;
+		}
+
 		public UserProfileDetails build() {
 			return new UserProfileDetails(this);
 		}

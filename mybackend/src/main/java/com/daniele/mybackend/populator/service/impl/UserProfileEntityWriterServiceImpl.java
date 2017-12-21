@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWriterService {
@@ -46,7 +46,7 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
 
             UserProfileDetails userProfile = UserProfileDetails.UserProfileBuilder.forCreation()
                     .withImgPath("http://vignette4.wikia.nocookie.net/scribblenauts/images/4/42/Crash_Test_Dummy.png/revision/latest?cb=20130309213400")
-            		.withName("User_" + i)
+                    .withName("User_" + i)
                     .withSurname("Surname_" + i)
                     .withNickname("Nickname_" + i)
                     .withEmail("user_" + i + "@email.com")
@@ -62,52 +62,65 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
         }
 
         String textShort = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
-        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. ";
-        
+                + "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. ";
+
         String textMedium = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
-        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
-        		+ "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
-        		+ "Manduma pindureta quium dia nois paga. ";
-        
+                + "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
+                + "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
+                + "Manduma pindureta quium dia nois paga. ";
+
         String textLong = "Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. "
-        		+ "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
-        		+ "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
-        		+ "Manduma pindureta quium dia nois paga. "
-        		+ "Sapien in monti palavris qui num significa nadis i pareci latim. "
-        		+ "Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.";
-        
-        for (int i = 0; i < userNumber; i++) {
-            Optional<UserProfileDetails> fromDb = userProfileService.getUserByEmail("user_" + i + "@email.com");
+                + "Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis. "
+                + "Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. "
+                + "Manduma pindureta quium dia nois paga. "
+                + "Sapien in monti palavris qui num significa nadis i pareci latim. "
+                + "Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.";
 
-            if (!fromDb.isPresent()) {
-                continue;
-            } else {
-                commentShort = Comment.CommentBuilder.forCreation()
-                        .withText(textShort)
-                        .withTopic("Geography")
-                        .withUser(fromDb.get())
-                        .build();
+        List<UserProfileDetails> allValidUsers = userProfileService.getAllValidUsers();
+        int size = allValidUsers.size();
 
-                System.out.println("Saving comment for " + fromDb);
-                commentService.store(commentShort);
+        for (int i = 0; i < size; i++) {
+            UserProfileDetails userProfile = allValidUsers.get(i);
 
-                commentMedium = Comment.CommentBuilder.forCreation()
-                        .withText(textMedium)
-                        .withTopic("Science")
-                        .withUser(fromDb.get())
-                        .build();
-                System.out.println("Saving comment for " + fromDb);
-                commentService.store(commentMedium);
+            commentShort = Comment.CommentBuilder.forCreation()
+                    .withText(textShort)
+                    .withTopic("Geography")
+                    .withUser(userProfile)
+                    .build();
+            System.out.println("Saving comment for " + userProfile);
+            commentService.store(commentShort);
 
-                commentLong = Comment.CommentBuilder.forCreation()
-                        .withText(textLong)
-                        .withTopic("History")
-                        .withUser(fromDb.get())
-                        .build();
-                System.out.println("Saving comment for " + fromDb);
-                commentService.store(commentLong);
+            commentMedium = Comment.CommentBuilder.forCreation()
+                    .withText(textMedium)
+                    .withTopic("Science")
+                    .withUser(userProfile)
+                    .build();
+            System.out.println("Saving comment for " + userProfile);
+            commentService.store(commentMedium);
 
-            }
+            commentLong = Comment.CommentBuilder.forCreation()
+                    .withText(textLong)
+                    .withTopic("History")
+                    .withUser(userProfile)
+                    .build();
+            System.out.println("Saving comment for " + userProfile);
+            commentService.store(commentLong);
         }
+
+        for (int i = 0; i < size - 1; i++) {
+            UserProfileDetails userProfile = allValidUsers.get(i);
+            HashSet<UserProfileDetails> randomFriendsSet = getRandomFriends(allValidUsers, i, size);
+
+            UserProfileDetails profileWithFriends = UserProfileDetails.UserProfileBuilder.forUpdate(userProfile)
+                    .withFriends(randomFriendsSet)
+                    .build();
+
+            userProfileService.store(profileWithFriends);
+        }
+    }
+
+    private HashSet<UserProfileDetails> getRandomFriends(List<UserProfileDetails> allValidUsers, int iMin, int iMax) {
+        int randomIndex = new Random().nextInt((iMax - iMin) + 1) + iMin + 1;
+        return new HashSet<>(allValidUsers.subList(randomIndex, iMax));
     }
 }
