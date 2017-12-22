@@ -2,21 +2,21 @@ package com.daniele.mybackend.userProfile.dto;
 
 public class AuthDto {
 	
-	private String email;
+	private String user;
 	private String password;
 	private String token;
 	
 	public AuthDto() {
 	}
 	
-	public AuthDto(String email, String password) {
+	public AuthDto(String user, String password) {
 		super();
-		this.email = email;
+		this.user = user;
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUser() {
+		return user;
 	}
 	
 	public String getPassword() {
@@ -29,7 +29,7 @@ public class AuthDto {
 
 	@Override
 	public String toString() {
-		return "AuthDto [email=" + email + ", token=" + token + "]";
+		return "AuthDto [user=" + user + ", token=" + token + "]";
 	}
 	
 }

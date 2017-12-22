@@ -13,5 +13,6 @@ public interface UserProfileService {
 	List<UserProfileDetails> getAllValidUsers();
 	Optional<UserProfileDetails> getUserById(Long id);
 	Optional<UserProfileDetails> getUserByEmail(String email);
+	Optional<UserProfileDetails> getUserByName(String name);
 	UserProfileDetails store(UserProfileDetails userProfileDetails);
 }

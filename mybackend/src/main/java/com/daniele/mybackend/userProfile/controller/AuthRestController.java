@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import com.daniele.mybackend.userProfile.repository.UserProfileRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,15 +43,15 @@ public class AuthRestController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Map<String, String>> authUser(@RequestBody AuthDto authDto) throws AuthenticationException {
         String token = null;
-        if (authDto.getEmail() != null && authDto.getPassword() != null) {
+        if (authDto.getUser() != null && authDto.getPassword() != null) {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    authDto.getEmail(),
+                    authDto.getUser(),
                     authDto.getPassword());
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            Optional<UserProfileDetails> userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+            Optional<UserProfileDetails> userProfile = userProfileService.getUserByName(authDto.getUser());
             if (userProfile.isPresent()) {
 				token = tokenUtils.generateToken(userProfile.get());
 			}
@@ -65,7 +64,7 @@ public class AuthRestController {
 	@PostMapping(path = "/validate-token")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Map<String, Boolean>> validateToken(@RequestBody AuthDto authDto) throws AuthenticationException {
-        Optional<UserProfileDetails> userProfile = userProfileService.getUserByEmail(authDto.getEmail());
+        Optional<UserProfileDetails> userProfile = userProfileService.getUserByName(authDto.getUser());
         Boolean isValid = false;
 		Map<String, Boolean> response;
 

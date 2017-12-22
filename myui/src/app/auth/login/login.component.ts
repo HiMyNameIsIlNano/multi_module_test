@@ -17,18 +17,17 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
-      const authData: Auth = new Auth(form.value.email, form.value.password);
+      const authData: Auth = new Auth(form.value.user, form.value.password);
       this.authService.onLogin(authData).subscribe(
               (loginResult: Auth) => {
                   if (loginResult.getToken()) {
                       localStorage.setItem('currentUser',
                               JSON.stringify({
-                                      username: loginResult.getEmail(),
+                                      username: loginResult.getUser(),
                                       token: loginResult.getToken()
                                   }));
                       const token = this.authService.isValidToken();
                       HeaderComponent.updateMenuItems.next(true);
-                      console.log(token);
                       this.router.navigate(['/account/friends']);
                   }
               },

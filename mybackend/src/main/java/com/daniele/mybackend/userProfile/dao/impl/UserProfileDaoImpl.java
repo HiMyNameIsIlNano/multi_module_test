@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -97,13 +98,19 @@ public class UserProfileDaoImpl implements UserProfileDao {
     public List<Record> findFriendsByUser(String user) {
         UserProfile p1 = UserProfile.USER_PROFILE.as("p1");
         UserProfile p2 = UserProfile.USER_PROFILE.as("p2");
+        SocialProfile s2 = SocialProfile.SOCIAL_PROFILE.as("s2");
         UserToFriend u2f = UserToFriend.USER_TO_FRIEND.as("u2f");
 
+        List<Field<?>> fields = new ArrayList<>();
+        fields.addAll(Arrays.asList(p2.fields()));
+        fields.addAll(Arrays.asList(s2.fields()));
+                
         SelectConditionStep<Record> select = create
-                .select()
+                .select(fields)
                 .from(p1)
                 .join(u2f).on(u2f.USER_ID.eq(p1.ID))
                 .join(p2).on(u2f.FRIEND_ID.eq(p2.ID))
+                .join(s2).on(p2.SOCIAL_ID_REF.eq(s2.ID))
                 .where(p1.NAME.eq(user));
 
         return select.fetch();

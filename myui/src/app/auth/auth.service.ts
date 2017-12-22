@@ -12,7 +12,9 @@ export class AuthService {
     private restUrl;
     private contentHeaders;
 
-    constructor( private http: Http, private configurationService: ConfigurationService, private userProfileService: UserProfileService ) {
+    constructor( private http: Http,
+                 private configurationService: ConfigurationService,
+                 private userProfileService: UserProfileService ) {
         this.restUrl = this.configurationService.getRestApiUrl() + '/auth-rest';
         this.contentHeaders = this.configurationService.getHeaders();
     }
@@ -26,7 +28,7 @@ export class AuthService {
             .map(
             ( response: Response ) => {
                 const data = response.json();
-                const result = Auth.withToken( authData.getEmail(), data.token );
+                const result = Auth.withToken( authData.getUser(), data.token );
                 return result;
             } )
             .catch(
@@ -39,9 +41,13 @@ export class AuthService {
         localStorage.removeItem( 'currentUser' );
     }
 
+    getLoggedInUser(): Auth {
+      const local = localStorage.getItem( 'currentUser' );
+      return Auth.fromLocalStorage( local );
+    }
+
     isValidToken(): Observable<boolean> {
-        const local = localStorage.getItem( 'currentUser' );
-        const auth = Auth.fromLocalStorage( local );
+        const auth = this.getLoggedInUser();
 
         return this.http.post( `${this.restUrl}/validate-token`, auth )
             .map(

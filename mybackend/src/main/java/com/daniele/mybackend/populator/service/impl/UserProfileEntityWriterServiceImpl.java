@@ -107,21 +107,16 @@ public class UserProfileEntityWriterServiceImpl implements UserProfileEntityWrit
             commentService.store(commentLong);
         }
 
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             UserProfileDetails userProfile = allValidUsers.get(i);
-            HashSet<UserProfileDetails> randomFriendsSet = getRandomFriends(allValidUsers, i, size);
+            HashSet<UserProfileDetails> friendsSet = new HashSet<>(allValidUsers.subList(i + 1, size));
 
             UserProfileDetails profileWithFriends = UserProfileDetails.UserProfileBuilder.forUpdate(userProfile)
-                    .withFriends(randomFriendsSet)
+                    .withFriends(friendsSet)
                     .build();
 
             userProfileService.store(profileWithFriends);
         }
     }
 
-    private HashSet<UserProfileDetails> getRandomFriends(List<UserProfileDetails> allValidUsers, int iMin, int iMax) {
-        // TODO: this can be out of bounds
-        int randomIndex = new Random().nextInt((iMax - iMin) + 1) + iMin + 1;
-        return new HashSet<>(allValidUsers.subList(randomIndex, iMax));
-    }
 }

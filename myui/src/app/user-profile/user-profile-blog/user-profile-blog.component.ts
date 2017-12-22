@@ -17,8 +17,7 @@ export class UserProfileBlogComponent implements OnInit {
 
   ngOnInit() {
     this.userProfileService
-      // TODO: read the name of the currently logged in user
-      .getUserCommentList('User_1')
+      .getUserCommentList()
       .subscribe(
         (comments: UserProfileBlogEntry[]) => {
           console.log(comments);

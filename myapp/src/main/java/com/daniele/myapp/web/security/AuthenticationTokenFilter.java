@@ -33,10 +33,10 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 			throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String authToken = httpRequest.getHeader(env.getProperty("application.token.header"));
-		String email = tokenUtils.getUsernameFromToken(authToken);
+		String username = tokenUtils.getUsernameFromToken(authToken);
 		
-		if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = loginService.loadUserByUsername(email);
+		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+			UserDetails userDetails = loginService.loadUserByUsername(username);
 			if (tokenUtils.validateToken(authToken, userDetails)) {
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 							userDetails, 

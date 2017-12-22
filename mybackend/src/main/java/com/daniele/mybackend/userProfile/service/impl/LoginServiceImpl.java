@@ -21,11 +21,11 @@ public class LoginServiceImpl implements LoginService {
 	private UserProfileService userProfileService;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<UserProfileDetails> userProfile = userProfileService.getUserByEmail(email);
+	public UserDetails loadUserByUsername(String user) throws UsernameNotFoundException {
+		Optional<UserProfileDetails> userProfile = userProfileService.getUserByName(user);
 
 		if (!userProfile.isPresent()) {
-			throw new UsernameNotFoundException(String.format("No profile found with email '%s'.", email));
+			throw new UsernameNotFoundException(String.format("No profile found with user '%s'.", user));
 		}
 		
 		return userProfile.get();

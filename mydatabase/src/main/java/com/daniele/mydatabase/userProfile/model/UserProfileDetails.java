@@ -54,9 +54,6 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 			inverseJoinColumns={@JoinColumn(name="FRIEND_ID")})
 	private Set<UserProfileDetails> friends = new HashSet<>();
 
-	/*@ManyToMany(mappedBy="friends")
-	private Set<UserProfileDetails> teammates = new HashSet<>();
-    */
 	public UserProfileDetails() {
 	}
 	
@@ -121,7 +118,7 @@ public class UserProfileDetails extends SlicedEntity implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.email;
+		return this.name;
 	}
 
 	@Override

@@ -2,9 +2,6 @@ package com.daniele.mybackend.userProfile.model;
 
 import com.daniele.mydatabase.shared.model.SortType;
 import com.daniele.mydatabase.userProfile.model.UserRole;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
 

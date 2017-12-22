@@ -30,6 +30,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Override
+	public Optional<UserProfileDetails> getUserByName(String name) {
+		UserProfileDetails profileDetails = userProfileRepository.findByName(name);
+		return profileDetails != null ? Optional.of(profileDetails) : Optional.empty();
+	}
+
+	@Override
 	@Transactional
 	public List<UserProfileDetails> getAllValidUsers() {
 		Iterable<UserProfileDetails> all = userProfileRepository.findAll();

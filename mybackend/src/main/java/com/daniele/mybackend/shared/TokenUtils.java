@@ -85,13 +85,12 @@ public class TokenUtils {
 
 	public String generateToken(UserProfileDetails userProfile) {
 		Map<String, Object> claims = new HashMap<String, Object>();
-		claims.put("sub", userProfile.getEmail());
+		claims.put("sub", userProfile.getName());
 		claims.put("audience", "web");
 		claims.put("created", this.generateCurrentDate());
 		return this.generateToken(claims);
 	}
 
-	// TODO: add AOP for exceptions
 	private String generateToken(Map<String, Object> claims) {
 		String secret = env.getProperty("application.token.secret");
 		try {

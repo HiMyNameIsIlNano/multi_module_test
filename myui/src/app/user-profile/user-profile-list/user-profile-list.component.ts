@@ -17,8 +17,7 @@ export class UserProfileListComponent implements OnInit {
 
     ngOnInit() {
         this.userProfileService
-            // TODO: read the name of the currently logged in user
-            .getFriendsForCurrentUser('User_1')
+            .getFriendsForCurrentUser()
             .subscribe(
             ( userProfiles: UserProfile[] ) => {
                 this.userProfiles = userProfiles;
