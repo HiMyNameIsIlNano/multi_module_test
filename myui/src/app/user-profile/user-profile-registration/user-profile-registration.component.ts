@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { UserProfile } from '../../user-profile/user-profile.model';
-import {Address} from "../../user-profile/address.model";
-import {SocialProfile} from "../../user-profile/social-profile.model";
+import { UserProfile } from '../user-profile.model';
+import {Address} from "../address.model";
+import {SocialProfile} from "../social-profile.model";
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html'
+  selector: 'app-user-profile-registration',
+  templateUrl: './user-profile-registration.component.html'
 })
-export class RegistrationComponent implements OnInit {
+export class UserProfileRegistrationComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 

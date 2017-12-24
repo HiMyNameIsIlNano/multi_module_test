@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserProfileService } from '../user-profile.service';
 import { UserProfile } from '../user-profile.model';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth.service';
 
 @Component( {
     selector: 'app-user-profile-list',

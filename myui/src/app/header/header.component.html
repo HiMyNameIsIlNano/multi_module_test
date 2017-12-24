@@ -1,32 +1,41 @@
-<div class="navbar navbar-default">
+<div class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a routerLink="/" class="navbar-brand">
-        Multi Module Application
-      </a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" routerLink="/">Multi Module Application</a>
     </div>
-    <div class="collapse navbar-collapse">
+    <div *ngIf="!isLoggedUser; else showMenu">
+      <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right" role="form" (ngSubmit)="onLogin(f)" #f="ngForm">
+          <div class="form-group">
+            <input type="text" placeholder="Username" id="user" name="user" ngModel class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" id="password" name="password" ngModel class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success">Sign in</button>
+        </form>
+      </div>
+    </div>
+    <ng-template #showMenu>
       <ul class="nav navbar-nav">
-	      <ng-template [ngIf]="isLoggedUser">
-	        <li routerLinkActive="active"><a [routerLink]="['/account/blog']">My Blog</a></li>
-	        <li routerLinkActive="active"><a [routerLink]="['/account/events']" >My Events</a></li>
-	        <li routerLinkActive="active"><a [routerLink]="['/account/friends']" >My Friends</a></li>
-	      </ng-template>
+        <li routerLinkActive="active"><a [routerLink]="['/account/blog']">My Blog</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/account/events']" >My Events</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['/account/friends']" >My Friends</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" appDropdown>
           <a style="cursor: pointer" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-          	<ng-template [ngIf]="!isLoggedUser">
-            	<li routerLinkActive="active"><a style="cursor: pointer" [routerLink]="['/login']">Log in</a></li>
-                <li routerLinkActive="active"><a style="cursor: pointer" [routerLink]="['/register']">Register</a></li>
-            </ng-template>
-            <ng-template [ngIf]="isLoggedUser">
-            	<li routerLinkActive="active"><a style="cursor: pointer" (click)="onLogout()">Log out</a></li>
-            </ng-template>
+            <li routerLinkActive="active"><a style="cursor: pointer" (click)="onLogout()">Log out</a></li>
           </ul>
         </li>
       </ul>
-    </div>
+    </ng-template>
   </div>
 </div>

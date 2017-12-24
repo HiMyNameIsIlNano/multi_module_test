@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {UserProfileRoutingModule} from "./user-profile-routing.module";
 import { UserProfileComponent } from './user-profile.component';
 import { UserProfileListItemComponent } from "./user-profile-list/user-profile-list-item/user-profile-list-item.component";
+import {UserProfileRegistrationComponent} from "./user-profile-registration/user-profile-registration.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { UserProfileListItemComponent } from "./user-profile-list/user-profile-l
     UserProfileRoutingModule
   ],
   declarations: [
+    UserProfileRegistrationComponent,
     UserProfileListComponent,
     UserProfileBlogComponent,
     UserProfileBlogItemComponent,

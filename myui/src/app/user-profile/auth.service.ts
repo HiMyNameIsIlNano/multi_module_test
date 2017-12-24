@@ -2,8 +2,8 @@ import { Http, Response } from '@angular/http';
 import { ConfigurationService } from '../shared/configuration.service';
 import { Injectable } from '@angular/core';
 import { Auth } from './auth.model';
-import { UserProfileService } from '../user-profile/user-profile.service';
-import { UserProfile } from '../user-profile/user-profile.model';
+import { UserProfileService } from './user-profile.service';
+import { UserProfile } from './user-profile.model';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

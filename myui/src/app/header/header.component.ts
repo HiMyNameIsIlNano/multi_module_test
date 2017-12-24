@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../user-profile/auth.service';
 import {Router} from '@angular/router';
 import {Subject} from "rxjs/Subject";
+import {Auth} from "../user-profile/auth.model";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -21,6 +23,25 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn();
+  }
+
+  onLogin(form: NgForm) {
+    const authData: Auth = new Auth(form.value.user, form.value.password);
+    this.authService.onLogin(authData).subscribe(
+      (loginResult: Auth) => {
+        if (loginResult.getToken()) {
+          localStorage.setItem('currentUser',
+            JSON.stringify({
+              username: loginResult.getUser(),
+              token: loginResult.getToken()
+            }));
+          const token = this.authService.isValidToken();
+          HeaderComponent.updateMenuItems.next(true);
+          this.router.navigate(['/account/blog']);
+        }
+      },
+      (error) => console.log(error)
+    );
   }
 
   isLoggedIn() {

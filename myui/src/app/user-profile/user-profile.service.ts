@@ -5,7 +5,7 @@ import {UserProfile} from './user-profile.model';
 import {ConfigurationService} from '../shared/configuration.service';
 import 'rxjs/Rx';
 import {UserProfileBlogEntry} from "./user-profile-blog/user-profile-blog-item/user-profile-blog-item.model";
-import {Auth} from "../auth/auth.model";
+import {Auth} from "./auth.model";
 
 @Injectable()
 export class UserProfileService {

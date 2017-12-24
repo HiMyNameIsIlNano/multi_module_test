@@ -2,8 +2,9 @@
 	<div class="page-header">
 		<h1 id="timeline">Blog's Timeline</h1>
 	</div>
-	<div *ngIf="!hasComments; else showComment">The user has not
-		joined any discussion yet</div>
+	<div *ngIf="!hasComments; else showComment">
+    The user has not joined any discussion yet
+  </div>
 	<ng-template #showComment>
 	<ul class="timeline" *ngFor="let comment of comments">
       <!--  <app-user-profile-blog-item [text]="comment.text" [topic]="comment.topic"></app-user-profile-blog-item> -->
@@ -21,7 +22,7 @@
 					</p>
 					<p>
 						<small class="text-muted">
-							<i class="glyphicon glyphicon-time"></i> 18:59 
+							<i class="glyphicon glyphicon-time"></i> 18:59
 						</small>
 					</p>
 				</div>
